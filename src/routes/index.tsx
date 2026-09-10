@@ -1,14 +1,15 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+import useEmblaCarousel, { type UseEmblaCarouselType } from "embla-carousel-react";
 import {
+  ArrowLeft,
+  ArrowRight,
   ArrowUpRight,
   ArrowUp,
   Check,
   Instagram,
   MessageCircle,
   Play,
-  Target,
-  TrendingDown,
   Zap,
 } from "lucide-react";
 import {
@@ -17,6 +18,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/site/reveal";
 import { WHATSAPP_URL, INSTAGRAM_URL } from "@/components/site/contact";
 import showreel from "@/assets/showreel.jpg";
@@ -233,6 +235,165 @@ function WhatsAppButton({
   );
 }
 
+type CarouselApi = UseEmblaCarouselType[1];
+
+function CarouselNavigation({
+  api,
+  label,
+}: {
+  api: CarouselApi;
+  label: string;
+}) {
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [scrollSnaps, setScrollSnaps] = useState<number[]>([]);
+  const [canScrollPrev, setCanScrollPrev] = useState(false);
+  const [canScrollNext, setCanScrollNext] = useState(false);
+
+  const updateState = useCallback(() => {
+    if (!api) return;
+    setSelectedIndex(api.selectedScrollSnap());
+    setScrollSnaps(api.scrollSnapList());
+    setCanScrollPrev(api.canScrollPrev());
+    setCanScrollNext(api.canScrollNext());
+  }, [api]);
+
+  useEffect(() => {
+    if (!api) return;
+    updateState();
+    api.on("select", updateState).on("reInit", updateState);
+    return () => {
+      api.off("select", updateState).off("reInit", updateState);
+    };
+  }, [api, updateState]);
+
+  return (
+    <div className="mt-7 flex items-center justify-between gap-5">
+      <div className="flex items-center gap-2" aria-label={`Pagination ${label}`}>
+        {scrollSnaps.map((_, index) => (
+          <button
+            key={index}
+            type="button"
+            onClick={() => api?.scrollTo(index)}
+            className={`h-1.5 rounded-full transition-all duration-300 ${
+              selectedIndex === index ? "w-8 bg-primary" : "w-1.5 bg-border hover:bg-foreground/30"
+            }`}
+            aria-label={`Aller à la page ${index + 1}`}
+            aria-current={selectedIndex === index ? "true" : undefined}
+          />
+        ))}
+      </div>
+      <div className="flex gap-2">
+        <Button
+          variant="outline"
+          size="icon"
+          className="size-11 rounded-full bg-background"
+          onClick={() => api?.scrollPrev()}
+          disabled={!canScrollPrev}
+          aria-label={`Précédent — ${label}`}
+        >
+          <ArrowLeft />
+        </Button>
+        <Button
+          variant="outline"
+          size="icon"
+          className="size-11 rounded-full bg-background"
+          onClick={() => api?.scrollNext()}
+          disabled={!canScrollNext}
+          aria-label={`Suivant — ${label}`}
+        >
+          <ArrowRight />
+        </Button>
+      </div>
+    </div>
+  );
+}
+
+function ProjectCarousel({ projects }: { projects: typeof PROJECTS }) {
+  const [viewportRef, api] = useEmblaCarousel({ align: "start", containScroll: "trimSnaps" });
+
+  useEffect(() => {
+    api?.reInit();
+    api?.scrollTo(0, true);
+  }, [api, projects]);
+
+  return (
+    <Reveal className="mt-12">
+      <div ref={viewportRef} className="overflow-hidden">
+        <div className="-ml-4 flex touch-pan-y md:-ml-6">
+          {projects.map((project) => (
+            <article
+              key={project.title}
+              className="min-w-0 flex-[0_0_88%] pl-4 sm:flex-[0_0_58%] md:pl-6 lg:flex-[0_0_40%]"
+            >
+              <div className="group h-full overflow-hidden rounded-lg border border-border bg-card transition-all duration-300 hover:-translate-y-1 hover:border-primary hover:shadow-lg">
+                <div className="relative overflow-hidden">
+                  <img
+                    src={project.image}
+                    alt={`Aperçu de la vidéo publicitaire pour ${project.client}`}
+                    loading="lazy"
+                    width={1280}
+                    height={800}
+                    className="aspect-video w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                  <span className="absolute bottom-3 left-3 flex size-10 items-center justify-center rounded-full bg-background/90 text-foreground transition-colors duration-300 group-hover:bg-primary group-hover:text-primary-foreground">
+                    <Play className="size-4" strokeWidth={1.75} />
+                  </span>
+                </div>
+                <div className="p-6">
+                  <p className="text-xs tracking-wide text-muted-foreground uppercase">
+                    {project.tag} · {project.client}
+                  </p>
+                  <h3 className="mt-2 text-lg font-semibold">{project.title}</h3>
+                  <p className="mt-2 text-sm text-muted-foreground">{project.goal}</p>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+      <CarouselNavigation api={api} label="projets récents" />
+    </Reveal>
+  );
+}
+
+function TestimonialCarousel() {
+  const [viewportRef, api] = useEmblaCarousel({ align: "start", containScroll: "trimSnaps" });
+
+  return (
+    <Reveal className="mt-12">
+      <div ref={viewportRef} className="overflow-hidden">
+        <div className="-ml-4 flex touch-pan-y md:-ml-6">
+          {TESTIMONIALS.map((testimonial) => (
+            <figure
+              key={testimonial.name}
+              className="min-w-0 flex-[0_0_90%] pl-4 sm:flex-[0_0_62%] md:pl-6 lg:flex-[0_0_46%]"
+            >
+              <div className="flex h-full min-h-64 flex-col justify-between rounded-lg border border-border bg-card p-8 transition-all duration-300 hover:-translate-y-1 hover:border-primary hover:shadow-lg md:p-10">
+                <div>
+                  <span className="font-display text-5xl leading-none text-primary">“</span>
+                  <blockquote className="mt-4 text-lg leading-relaxed text-foreground md:text-xl">
+                    {testimonial.quote}
+                  </blockquote>
+                </div>
+                <figcaption className="mt-8 flex items-center gap-3 text-sm text-muted-foreground">
+                  <span className="flex size-10 items-center justify-center rounded-full bg-secondary font-semibold text-secondary-foreground">
+                    {testimonial.name.charAt(0)}
+                  </span>
+                  <span>
+                    <strong className="block font-semibold text-foreground">{testimonial.name}</strong>
+                    {testimonial.company}
+                  </span>
+                </figcaption>
+              </div>
+            </figure>
+          ))}
+        </div>
+      </div>
+      <CarouselNavigation api={api} label="témoignages clients" />
+    </Reveal>
+  );
+}
+
 function Index() {
   const [filter, setFilter] = useState<(typeof FILTERS)[number]>("Tous");
   const projects = PROJECTS.filter((p) => filter === "Tous" || p.tag === filter);
@@ -272,14 +433,13 @@ function Index() {
               Motion design 2D · produits digitaux
             </p>
             <h1 className="text-4xl leading-[1.05] font-semibold md:text-6xl">
-              Vos publicités vidéo devraient vendre.
-              <br />
-              <span className="text-primary">Pas juste faire joli.</span>
+              On crée des vidéos publicitaires en <span className="text-primary">motion design</span>
             </h1>
-            <p className="mx-auto mt-6 max-w-xl text-base text-muted-foreground md:text-lg">
-              Je crée des vidéos publicitaires en motion design 2D pour les e-commerçants de
-              formations, ebooks, templates et SaaS. Un script pensé pour convertir, une animation
-              qui retient l'attention dès la première seconde.
+            <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg">
+              Formation, e-book, template, logiciel, application, fichiers numériques… Peu importe
+              votre produit, on vous crée la vidéo publicitaire parfaite, du script à la version
+              finale. Plus de trafic. Plus de clics. Plus de ventes, pendant que vous dormez
+              tranquillement.
             </p>
             <div className="mt-9 flex flex-col items-center gap-3">
               <WhatsAppButton size="lg">Discutons de votre projet</WhatsAppButton>
@@ -320,40 +480,6 @@ function Index() {
           </div>
         </section>
 
-        {/* Problème / Solution */}
-        <section className="mx-auto max-w-6xl px-5 py-24">
-          <Reveal className="max-w-2xl">
-            <h2 className="text-3xl font-semibold md:text-4xl">
-              Une vidéo générique coûte plus cher qu'aucune vidéo.
-            </h2>
-          </Reveal>
-          <div className="mt-14 grid gap-12 md:grid-cols-2">
-            <Reveal className="border-t border-border pt-8">
-              <TrendingDown className="size-6 text-foreground" strokeWidth={1.5} />
-              <h3 className="mt-5 text-xl font-semibold">Le problème</h3>
-              <ul className="mt-5 space-y-3 text-muted-foreground">
-                <li>Des templates réutilisés que votre audience a déjà vus cent fois.</li>
-                <li>Une promesse floue : on ne comprend pas ce que le produit change.</li>
-                <li>Trois secondes d'intro décorative — le scroll a déjà repris.</li>
-                <li>Un seul format livré, inexploitable sur la moitié des plateformes.</li>
-              </ul>
-            </Reveal>
-            <Reveal delay={120} className="border-t-2 border-primary pt-8">
-              <Target className="size-6 text-primary" strokeWidth={1.5} />
-              <h3 className="mt-5 text-xl font-semibold">La solution</h3>
-              <ul className="mt-5 space-y-3 text-muted-foreground">
-                <li>Un spécialiste des produits digitaux, pas un généraliste polyvalent.</li>
-                <li>Le script d'abord : accroche, bénéfice, preuve, appel à l'action.</li>
-                <li>Une animation au service du message, jamais l'inverse.</li>
-                <li>Tous les formats livrés, prêts à diffuser le jour même.</li>
-              </ul>
-            </Reveal>
-          </div>
-          <Reveal delay={200} className="mt-12">
-            <WhatsAppButton>Voir ce que ça donne sur votre produit</WhatsAppButton>
-          </Reveal>
-        </section>
-
         {/* Portfolio */}
         <section id="portfolio" className="border-t border-border bg-muted/40">
           <div className="mx-auto max-w-6xl px-5 py-24">
@@ -366,49 +492,25 @@ function Index() {
               </div>
               <div className="flex flex-wrap gap-2">
                 {FILTERS.map((f) => (
-                  <button
+                  <Button
                     key={f}
+                    type="button"
+                    variant="outline"
+                    size="sm"
                     onClick={() => setFilter(f)}
-                    className={`rounded-full border px-4 py-1.5 text-sm transition-colors duration-200 ${
+                    className={`rounded-full px-4 transition-colors duration-200 ${
                       filter === f
                         ? "border-primary bg-primary text-primary-foreground"
                         : "border-border text-muted-foreground hover:border-primary hover:text-primary"
                     }`}
                   >
                     {f}
-                  </button>
+                  </Button>
                 ))}
               </div>
             </Reveal>
 
-            <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-              {projects.map((project, i) => (
-                <Reveal as="article" key={project.title} delay={(i % 3) * 90}>
-                  <div className="group h-full overflow-hidden rounded-xl border border-border bg-card transition-all duration-300 hover:-translate-y-1 hover:border-primary">
-                    <div className="relative overflow-hidden">
-                      <img
-                        src={project.image}
-                        alt={`Aperçu de la vidéo publicitaire pour ${project.client}`}
-                        loading="lazy"
-                        width={1280}
-                        height={800}
-                        className="aspect-video w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                      />
-                      <span className="absolute bottom-3 left-3 flex size-9 items-center justify-center rounded-full bg-background/90 text-foreground transition-colors duration-300 group-hover:bg-primary group-hover:text-primary-foreground">
-                        <Play className="size-4" strokeWidth={1.75} />
-                      </span>
-                    </div>
-                    <div className="p-6">
-                      <p className="text-xs tracking-wide text-muted-foreground uppercase">
-                        {project.tag} · {project.client}
-                      </p>
-                      <h3 className="mt-2 text-lg font-semibold">{project.title}</h3>
-                      <p className="mt-2 text-sm text-muted-foreground">{project.goal}</p>
-                    </div>
-                  </div>
-                </Reveal>
-              ))}
-            </div>
+            <ProjectCarousel projects={projects} />
           </div>
         </section>
 
@@ -441,19 +543,7 @@ function Index() {
             <Reveal>
               <h2 className="text-3xl font-semibold md:text-4xl">Ce qu'en disent les clients</h2>
             </Reveal>
-            <div className="mt-12 grid gap-6 md:grid-cols-3">
-              {TESTIMONIALS.map((t, i) => (
-                <Reveal key={t.name} delay={i * 90}>
-                  <figure className="h-full rounded-xl border border-border bg-card p-7 transition-all duration-300 hover:-translate-y-1 hover:border-primary">
-                    <span className="font-display text-3xl leading-none text-primary">"</span>
-                    <blockquote className="mt-3 text-foreground">{t.quote}</blockquote>
-                    <figcaption className="mt-6 text-sm text-muted-foreground">
-                      <span className="font-semibold text-foreground">{t.name}</span> — {t.company}
-                    </figcaption>
-                  </figure>
-                </Reveal>
-              ))}
-            </div>
+            <TestimonialCarousel />
           </div>
         </section>
 

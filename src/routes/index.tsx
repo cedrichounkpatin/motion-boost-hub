@@ -220,12 +220,15 @@ function WhatsAppButton({
       href={WHATSAPP_URL}
       target="_blank"
       rel="noopener noreferrer"
-      className={`inline-flex items-center justify-center gap-2 rounded-full bg-primary font-semibold text-primary-foreground transition-all duration-300 hover:-translate-y-0.5 hover:brightness-95 ${
+      className={`relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-full bg-primary font-semibold text-primary-foreground shadow-[0_10px_25px_-5px_rgba(0,0,0,0.15)] ring-4 ring-white/20 transition-all duration-300 hover:-translate-y-0.5 hover:scale-105 hover:brightness-95 active:scale-95 ${
         size === "lg" ? "px-8 py-4 text-base" : "px-5 py-2.5 text-sm"
       }`}
     >
-      <MessageCircle className="size-4" strokeWidth={1.75} />
-      {children}
+      <span className="pointer-events-none absolute inset-0 z-0 w-1/3 bg-gradient-to-r from-transparent via-white/40 to-transparent animate-shine" />
+      <span className="relative z-10 flex items-center justify-center gap-2">
+        <MessageCircle className="size-4" strokeWidth={1.75} />
+        {children}
+      </span>
     </a>
   );
 }

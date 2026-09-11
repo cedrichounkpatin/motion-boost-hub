@@ -26,6 +26,9 @@ import workCourse from "@/assets/work-course.jpg";
 import workSaas from "@/assets/work-saas2.jpg";
 import workEbook from "@/assets/work-ebook.jpg";
 import workTemplate from "@/assets/work-template.jpg";
+import testimonial1 from "@/assets/testimonial-1.jpg";
+import testimonial2 from "@/assets/testimonial-2.jpg";
+import testimonial3 from "@/assets/testimonial-3.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -155,6 +158,28 @@ const TESTIMONIALS = [
     quote: "Trois formats livrés en une semaine, zéro aller-retour inutile. On a scalé direct.",
     name: "Sarah M.",
     company: "Nova Health",
+  },
+  {
+    quote:
+      "On a doublé les ventes de notre formation en un mois grâce à la nouvelle vidéo publicitaire.",
+    name: "Claire D.",
+    company: "Académie Lumen",
+    image: testimonial1,
+    video: true,
+  },
+  {
+    quote: "La vidéo explique notre SaaS en 20 secondes mieux que notre page de vente entière.",
+    name: "Malik T.",
+    company: "Flowdesk",
+    image: testimonial2,
+    video: true,
+  },
+  {
+    quote: "Nos templates se vendent enfin. Le script et le rythme font toute la différence.",
+    name: "Grace A.",
+    company: "Pixel Market",
+    image: testimonial3,
+    video: true,
   },
 ];
 

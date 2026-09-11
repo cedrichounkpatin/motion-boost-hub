@@ -26,6 +26,9 @@ import workCourse from "@/assets/work-course.jpg";
 import workSaas from "@/assets/work-saas2.jpg";
 import workEbook from "@/assets/work-ebook.jpg";
 import workTemplate from "@/assets/work-template.jpg";
+import testimonial1 from "@/assets/testimonial-1.jpg";
+import testimonial2 from "@/assets/testimonial-2.jpg";
+import testimonial3 from "@/assets/testimonial-3.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -138,7 +141,13 @@ const PROCESS = [
   },
 ];
 
-const TESTIMONIALS = [
+const TESTIMONIALS: {
+  quote: string;
+  name: string;
+  company: string;
+  image?: string;
+  video?: boolean;
+}[] = [
   {
     quote:
       "La vidéo a remplacé notre ancienne pub en 48 h. Le coût par lead est passé de 4,10 € à 2,30 €.",
@@ -155,6 +164,28 @@ const TESTIMONIALS = [
     quote: "Trois formats livrés en une semaine, zéro aller-retour inutile. On a scalé direct.",
     name: "Sarah M.",
     company: "Nova Health",
+  },
+  {
+    quote:
+      "On a doublé les ventes de notre formation en un mois grâce à la nouvelle vidéo publicitaire.",
+    name: "Claire D.",
+    company: "Académie Lumen",
+    image: testimonial1,
+    video: true,
+  },
+  {
+    quote: "La vidéo explique notre SaaS en 20 secondes mieux que notre page de vente entière.",
+    name: "Malik T.",
+    company: "Flowdesk",
+    image: testimonial2,
+    video: true,
+  },
+  {
+    quote: "Nos templates se vendent enfin. Le script et le rythme font toute la différence.",
+    name: "Grace A.",
+    company: "Pixel Market",
+    image: testimonial3,
+    video: true,
   },
 ];
 
@@ -368,22 +399,62 @@ function TestimonialCarousel() {
               key={testimonial.name}
               className="min-w-0 flex-[0_0_90%] pl-4 sm:flex-[0_0_62%] md:pl-6 lg:flex-[0_0_46%]"
             >
-              <div className="flex h-full min-h-64 flex-col justify-between rounded-lg border border-border bg-card p-8 transition-all duration-300 hover:-translate-y-1 hover:border-primary hover:shadow-lg md:p-10">
-                <div>
-                  <span className="font-display text-5xl leading-none text-primary">“</span>
-                  <blockquote className="mt-4 text-lg leading-relaxed text-foreground md:text-xl">
-                    {testimonial.quote}
-                  </blockquote>
+              <div className="group flex h-full min-h-64 flex-col overflow-hidden rounded-lg border border-border bg-card transition-all duration-300 hover:-translate-y-1 hover:border-primary hover:shadow-lg">
+                {testimonial.image ? (
+                  <div className="relative aspect-video overflow-hidden bg-secondary">
+                    <img
+                      src={testimonial.image}
+                      alt={`Témoignage vidéo de ${testimonial.name}`}
+                      loading="lazy"
+                      width={800}
+                      height={800}
+                      className="size-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                    {testimonial.video ? (
+                      <>
+                        <span className="absolute inset-0 bg-black/25" />
+                        <span className="absolute inset-0 flex items-center justify-center">
+                          <span className="flex size-14 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-lg transition-transform duration-300 group-hover:scale-110">
+                            <Play className="size-5" strokeWidth={1.75} />
+                          </span>
+                        </span>
+                        <span className="absolute bottom-3 left-3 rounded-full bg-background/90 px-3 py-1 text-xs font-medium">
+                          Témoignage vidéo
+                        </span>
+                      </>
+                    ) : null}
+                  </div>
+                ) : null}
+                <div className="flex flex-1 flex-col justify-between p-8 md:p-10">
+                  <div>
+                    <span className="font-display text-5xl leading-none text-primary">“</span>
+                    <blockquote className="mt-4 text-lg leading-relaxed text-foreground md:text-xl">
+                      {testimonial.quote}
+                    </blockquote>
+                  </div>
+                  <figcaption className="mt-8 flex items-center gap-3 text-sm text-muted-foreground">
+                    <span className="flex size-10 items-center justify-center overflow-hidden rounded-full bg-secondary font-semibold text-secondary-foreground">
+                      {testimonial.image ? (
+                        <img
+                          src={testimonial.image}
+                          alt=""
+                          loading="lazy"
+                          width={800}
+                          height={800}
+                          className="size-full object-cover"
+                        />
+                      ) : (
+                        testimonial.name.charAt(0)
+                      )}
+                    </span>
+                    <span>
+                      <strong className="block font-semibold text-foreground">
+                        {testimonial.name}
+                      </strong>
+                      {testimonial.company}
+                    </span>
+                  </figcaption>
                 </div>
-                <figcaption className="mt-8 flex items-center gap-3 text-sm text-muted-foreground">
-                  <span className="flex size-10 items-center justify-center rounded-full bg-secondary font-semibold text-secondary-foreground">
-                    {testimonial.name.charAt(0)}
-                  </span>
-                  <span>
-                    <strong className="block font-semibold text-foreground">{testimonial.name}</strong>
-                    {testimonial.company}
-                  </span>
-                </figcaption>
               </div>
             </figure>
           ))}

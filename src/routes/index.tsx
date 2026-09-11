@@ -141,7 +141,13 @@ const PROCESS = [
   },
 ];
 
-const TESTIMONIALS = [
+const TESTIMONIALS: {
+  quote: string;
+  name: string;
+  company: string;
+  image?: string;
+  video?: boolean;
+}[] = [
   {
     quote:
       "La vidéo a remplacé notre ancienne pub en 48 h. Le coût par lead est passé de 4,10 € à 2,30 €.",

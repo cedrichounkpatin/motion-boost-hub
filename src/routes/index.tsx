@@ -641,13 +641,14 @@ function Index() {
             <PillMarquee />
             <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg">
               Peu importe votre produit, on vous crée la vidéo publicitaire parfaite, du script à la
-              version finale. Plus de trafic. Plus de clics. Plus de ventes, pendant que vous dormez
+              version finale.&nbsp;
+              Plus de trafic. Plus de clics. Plus de ventes, pendant que vous dormez
               tranquillement.
             </p>
             <div className="mt-9 flex flex-col items-center gap-3">
               <WhatsAppButton size="lg" href="#offres">Lancer mon projet vidéo</WhatsAppButton>
               <p className="text-sm text-muted-foreground">
-                <span className="font-semibold text-foreground">180+ vidéos livrées</span> pour 40+
+                <span className="font-semibold text-foreground">180+ vidéos livrées</span> pour 90+
                 e-commerçants digitaux
               </p>
             </div>

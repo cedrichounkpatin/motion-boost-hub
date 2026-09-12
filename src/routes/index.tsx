@@ -341,10 +341,18 @@ const OFFERS = [
     featured: true,
   },
   {
-    name: "Accompagnement mensuel",
-    price: "Sur devis",
-    text: "Un flux régulier de créas pour scaler.",
-    items: ["4 à 8 vidéos / mois", "Itérations sur les données", "Priorité de production", "Canal WhatsApp direct"],
+    name: "Forfait GOLD 🥇",
+    subtitle: "Le plus complet",
+    price: "163€",
+    oldPrice: "Total : 227€",
+    text: "",
+    items: [
+      { text: "Deux différentes vidéo publicitaires avec deux angles marketing différents pour le même produits pour maximiser les ventes.", type: "check", prefix: "2 Vidéos publicitaires", suffix: "[110€]" },
+      { text: "Trois affiches publicitaires avec deux angles marketing différents pour le même produits pour maximiser les ventes.", type: "check", prefix: "+ 3 visuel Ads", suffix: "[45€]" },
+      { text: "Un texte court et percutant pour chaque visuel ADS", type: "check", prefix: "+ 3 textes Publicitaire (Ads)", suffix: "[23€]" },
+      { text: "Une page de vente prête à copier coller", type: "gift", prefix: "1 Page de vente", suffix: "[35€]" },
+      { text: "Livraison en 07 jours", type: "bold" },
+    ],
     featured: false,
   },
 ];

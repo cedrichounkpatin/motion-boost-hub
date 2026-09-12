@@ -232,80 +232,17 @@
   isolation: isolate;
 }
 
-.traffic-visual img {
-  position: absolute;
+.traffic-banner {
   display: block;
-  object-fit: contain;
+  height: auto;
   pointer-events: none;
   user-select: none;
+  animation: traffic-float 5s ease-in-out infinite;
 }
 
-.traffic-ring {
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  animation: traffic-ring 18s linear infinite;
-}
-
-.traffic-megaphone {
-  left: 25.8%;
-  top: 21.1%;
-  width: 47.7%;
-  height: 52.6%;
-  z-index: 2;
-  transform-origin: 42% 55%;
-  animation: traffic-megaphone 4.5s ease-in-out infinite;
-}
-
-.traffic-eye {
-  left: 9.1%;
-  top: 36%;
-  width: 17.4%;
-  height: 20.2%;
-  z-index: 3;
-  animation: traffic-eye 3.2s ease-in-out infinite;
-}
-
-.traffic-money {
-  left: 68.9%;
-  top: 3.5%;
-  width: 17.4%;
-  height: 20.2%;
-  z-index: 3;
-  animation: traffic-money 3.8s ease-in-out infinite;
-}
-
-.traffic-audience {
-  left: 69.7%;
-  top: 75.4%;
-  width: 16.7%;
-  height: 20.2%;
-  z-index: 3;
-  animation: traffic-audience 4.1s ease-in-out infinite;
-}
-
-@keyframes traffic-ring {
-  to { transform: rotate(360deg); }
-}
-
-@keyframes traffic-megaphone {
-  0%, 100% { transform: translateY(0) rotate(-1deg); }
-  50% { transform: translateY(-3%) rotate(1.5deg); }
-}
-
-@keyframes traffic-eye {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  50% { transform: translate(-5%, -7%) scale(1.08); }
-}
-
-@keyframes traffic-money {
-  0%, 100% { transform: translateY(0) rotate(0); }
-  50% { transform: translateY(-10%) rotate(6deg); }
-}
-
-@keyframes traffic-audience {
-  0%, 100% { transform: translateY(0) scale(1); }
-  50% { transform: translateY(8%) scale(1.06); }
+@keyframes traffic-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
 }
 
 .stats-section {
@@ -536,11 +473,7 @@
     animation: none;
   }
 
-  .traffic-ring,
-  .traffic-megaphone,
-  .traffic-eye,
-  .traffic-money,
-  .traffic-audience {
+  .traffic-banner {
     animation: none;
   }
 

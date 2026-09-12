@@ -244,15 +244,18 @@ const FAQ = [
 function WhatsAppButton({
   children,
   size = "default",
+  href = WHATSAPP_URL,
 }: {
   children: React.ReactNode;
   size?: "default" | "lg";
+  href?: string;
 }) {
+  const isExternal = href.startsWith("http");
   return (
     <a
-      href={WHATSAPP_URL}
-      target="_blank"
-      rel="noopener noreferrer"
+      href={href}
+      target={isExternal ? "_blank" : undefined}
+      rel={isExternal ? "noopener noreferrer" : undefined}
       className={`relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-full bg-primary font-semibold text-primary-foreground shadow-[0_10px_25px_-5px_rgba(0,0,0,0.15)] ring-4 ring-white/20 transition-all duration-300 hover:-translate-y-0.5 hover:scale-105 hover:brightness-95 active:scale-95 ${
         size === "lg" ? "px-8 py-4 text-base" : "px-5 py-2.5 text-sm"
       }`}
@@ -488,7 +491,7 @@ function Index() {
               </a>
             ))}
           </nav>
-          <WhatsAppButton>
+          <WhatsAppButton href="#offres">
             <span className="hidden sm:inline">Discutons sur WhatsApp</span>
             <span className="sm:hidden">WhatsApp</span>
           </WhatsAppButton>
@@ -508,10 +511,11 @@ function Index() {
             </h1>
             <div className="mx-auto mt-6 flex max-w-2xl flex-wrap items-center justify-center gap-2">
               {["Formation", "E-book", "Template", "Logiciel", "Application", "Fichiers numériques"].map(
-                (pill) => (
+                (pill, i) => (
                   <span
                     key={pill}
-                    className="inline-flex items-center rounded-full border border-border bg-background px-3 py-1 text-sm font-medium text-foreground"
+                    className="animate-pill inline-flex items-center rounded-full border border-border bg-background px-3 py-1 text-sm font-medium text-foreground"
+                    style={{ animationDelay: `${i * 80}ms` }}
                   >
                     {pill}
                   </span>

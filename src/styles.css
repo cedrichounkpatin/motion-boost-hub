@@ -199,6 +199,21 @@
   }
 }
 
+@utility animate-pill {
+  animation: pill-in 0.55s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes pill-in {
+  0% {
+    opacity: 0;
+    transform: translateY(10px) scale(0.96);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .reveal {
     opacity: 1;
@@ -208,6 +223,12 @@
 
   .animate-shine {
     animation: none;
+  }
+
+  .animate-pill {
+    animation: none;
+    opacity: 1;
+    transform: none;
   }
 }
 

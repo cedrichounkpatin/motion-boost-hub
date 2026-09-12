@@ -29,6 +29,7 @@ import workTemplate from "@/assets/work-template.jpg";
 import testimonial1 from "@/assets/testimonial-1.jpg";
 import testimonial2 from "@/assets/testimonial-2.jpg";
 import testimonial3 from "@/assets/testimonial-3.jpg";
+import traficVisual from "@/assets/trafic.png.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -591,22 +592,6 @@ function TestimonialCarousel() {
   );
 }
 
-function Laurel({ mirrored = false }: { mirrored?: boolean }) {
-  return (
-    <svg
-      viewBox="0 0 54 88"
-      aria-hidden="true"
-      className={`h-[68px] w-10 shrink-0 text-primary sm:h-[82px] sm:w-12 ${mirrored ? "-scale-x-100" : ""}`}
-      fill="currentColor"
-    >
-      <path d="M38.4 1.5c7.5 9.3 8.4 19.3 2.4 29.4-7.1-4.9-8.3-15.8-2.4-29.4Z" />
-      <path d="M18.1 16.6c10.5 3.3 16.6 10.7 17.4 21.2-8.5.8-16.8-7.4-17.4-21.2Z" />
-      <path d="M7.8 38.1c11.2.2 19 5.5 22.7 15.4-7.9 3.2-18.1-2.2-22.7-15.4Z" />
-      <path d="M1.2 62.9c12.2-2.5 22.3.8 29.2 9.6-7.1 5.6-19.2 2.7-29.2-9.6Z" />
-    </svg>
-  );
-}
-
 function Index() {
   const [filter, setFilter] = useState<(typeof FILTERS)[number]>("Tous");
   const projects = PROJECTS.filter((p) => filter === "Tous" || p.tag === filter);
@@ -641,16 +626,14 @@ function Index() {
         {/* Hero */}
         <section className="mx-auto max-w-6xl px-5 pt-20 pb-24 md:pt-28">
           <Reveal className="mx-auto max-w-3xl text-center">
-            <div className="mx-auto mb-8 flex w-full max-w-[650px] items-center justify-center gap-4 bg-muted/60 px-4 py-6 sm:gap-7 sm:px-12 sm:py-7">
-              <Laurel />
-              <p className="min-w-0 text-center text-base leading-[1.22] text-foreground sm:text-[21px]">
-                <span className="block"><strong className="font-bold">TOP 1%</strong> en création</span>
-                <span className="block">
-                  de <strong className="font-bold">vidéos publicitaires</strong> pour les{" "}
-                  <strong className="font-bold">produits digitaux</strong>
-                </span>
-              </p>
-              <Laurel mirrored />
+            <div className="mx-auto mb-8 flex h-[170px] w-full max-w-[650px] items-center justify-center overflow-hidden sm:h-[220px]">
+              <img
+                src={traficVisual.url}
+                alt="Illustration d'un mégaphone représentant le trafic, l'audience et les ventes"
+                width={1920}
+                height={672}
+                className="h-auto w-[150%] max-w-none object-contain sm:w-[130%]"
+              />
             </div>
             <h1 className="text-4xl leading-[1.05] font-semibold md:text-6xl">
               On crée des vidéos publicitaires en <span className="text-primary">motion design</span>

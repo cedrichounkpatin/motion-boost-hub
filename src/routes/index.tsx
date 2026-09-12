@@ -594,28 +594,15 @@ function TestimonialCarousel() {
 function Laurel({ mirrored = false }: { mirrored?: boolean }) {
   return (
     <svg
-      viewBox="0 0 72 104"
+      viewBox="0 0 54 88"
       aria-hidden="true"
-      className={`h-16 w-11 shrink-0 text-primary sm:h-20 sm:w-14 ${mirrored ? "-scale-x-100" : ""}`}
-      fill="none"
+      className={`h-[68px] w-10 shrink-0 text-primary sm:h-[82px] sm:w-12 ${mirrored ? "-scale-x-100" : ""}`}
+      fill="currentColor"
     >
-      <path
-        d="M57 9C33 22 19 47 18 76c0 8 2 15 6 21"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-      />
-      <g fill="currentColor">
-        <ellipse cx="49" cy="17" rx="5" ry="11" transform="rotate(43 49 17)" />
-        <ellipse cx="38" cy="29" rx="5" ry="11" transform="rotate(35 38 29)" />
-        <ellipse cx="29" cy="43" rx="5" ry="11" transform="rotate(25 29 43)" />
-        <ellipse cx="23" cy="59" rx="5" ry="11" transform="rotate(15 23 59)" />
-        <ellipse cx="21" cy="76" rx="5" ry="11" transform="rotate(5 21 76)" />
-        <ellipse cx="43" cy="36" rx="4.5" ry="10" transform="rotate(72 43 36)" />
-        <ellipse cx="34" cy="52" rx="4.5" ry="10" transform="rotate(62 34 52)" />
-        <ellipse cx="29" cy="69" rx="4.5" ry="10" transform="rotate(52 29 69)" />
-        <ellipse cx="29" cy="86" rx="4.5" ry="10" transform="rotate(42 29 86)" />
-      </g>
+      <path d="M38.4 1.5c7.5 9.3 8.4 19.3 2.4 29.4-7.1-4.9-8.3-15.8-2.4-29.4Z" />
+      <path d="M18.1 16.6c10.5 3.3 16.6 10.7 17.4 21.2-8.5.8-16.8-7.4-17.4-21.2Z" />
+      <path d="M7.8 38.1c11.2.2 19 5.5 22.7 15.4-7.9 3.2-18.1-2.2-22.7-15.4Z" />
+      <path d="M1.2 62.9c12.2-2.5 22.3.8 29.2 9.6-7.1 5.6-19.2 2.7-29.2-9.6Z" />
     </svg>
   );
 }
@@ -654,9 +641,9 @@ function Index() {
         {/* Hero */}
         <section className="mx-auto max-w-6xl px-5 pt-20 pb-24 md:pt-28">
           <Reveal className="mx-auto max-w-3xl text-center">
-            <div className="mx-auto mb-8 flex w-full max-w-2xl items-center justify-center gap-3 bg-muted/60 px-3 py-5 sm:gap-8 sm:px-10 sm:py-6">
+            <div className="mx-auto mb-8 flex w-full max-w-[650px] items-center justify-center gap-4 bg-muted/60 px-4 py-6 sm:gap-7 sm:px-12 sm:py-7">
               <Laurel />
-              <p className="min-w-0 flex-1 text-center text-sm leading-snug text-foreground sm:text-base">
+              <p className="min-w-0 text-center text-base leading-[1.22] text-foreground sm:text-[21px]">
                 <span className="block"><strong className="font-bold">TOP 1%</strong> en création</span>
                 <span className="block">
                   de <strong className="font-bold">vidéos publicitaires</strong> pour les{" "}

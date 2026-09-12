@@ -241,6 +241,35 @@ const FAQ = [
   },
 ];
 
+const HERO_PILLS = [
+  "Formation",
+  "E-book",
+  "Template",
+  "Logiciel",
+  "Application",
+  "Fichiers numériques",
+];
+
+function PillMarquee() {
+  const items = [...HERO_PILLS, ...HERO_PILLS];
+  return (
+    <div className="relative mx-auto mt-6 max-w-2xl overflow-hidden">
+      <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-8 bg-gradient-to-r from-background to-transparent" />
+      <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-8 bg-gradient-to-l from-background to-transparent" />
+      <div className="animate-marquee flex w-max gap-2 hover:[animation-play-state:paused]">
+        {items.map((pill, i) => (
+          <span
+            key={`${pill}-${i}`}
+            className="inline-flex items-center rounded-full border border-border bg-background px-3 py-1 text-sm font-medium text-foreground"
+          >
+            {pill}
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 function WhatsAppButton({
   children,
   size = "default",

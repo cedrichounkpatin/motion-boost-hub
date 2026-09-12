@@ -326,10 +326,18 @@ const OFFERS = [
     featured: false,
   },
   {
-    name: "Pack test créatif",
-    price: "Sur devis",
-    text: "Trois variations pour tester vos angles.",
-    items: ["3 accroches différentes", "Voix off incluse", "Recommandations de diffusion", "3 révisions"],
+    name: "Forfait VIP 🏆",
+    subtitle: "Le plus populaire ⭐⭐⭐",
+    price: "92€",
+    oldPrice: "Total : 142€",
+    text: "",
+    items: [
+      { text: "", type: "check", prefix: "1 vidéo publicitaire", suffix: "[62€]" },
+      { text: "Deux différentes affiches publicitaires avec deux angles marketing différents pour le même produits pour maximiser les ventes (Andromeda).", type: "check", prefix: "+ 2 visuel Ads", suffix: "[30€]" },
+      { text: "Un texte court et percutant pour chaque affiches publicitaires", type: "check", prefix: "+ 2 textes Publicitaire (Ads)", suffix: "[15€]" },
+      { text: "Livraison en 05 jours", type: "bold" },
+      { text: "Une page de vente prête à copier coller", type: "gift", prefix: "1 Page de vente", suffix: "[35€]" },
+    ],
     featured: true,
   },
   {
@@ -792,13 +800,18 @@ function Index() {
                   {offer.subtitle ? (
                     <p className="mt-1 text-sm text-muted-foreground">{offer.subtitle}</p>
                   ) : null}
-                  <p
-                    className={`font-display mt-4 text-3xl font-semibold ${
-                      offer.price.includes("€") ? "text-primary" : ""
-                    }`}
-                  >
-                    {offer.price}
-                  </p>
+                  <div className="mt-4">
+                    {offer.oldPrice ? (
+                      <p className="text-sm text-muted-foreground line-through">{offer.oldPrice}</p>
+                    ) : null}
+                    <p
+                      className={`font-display text-3xl font-semibold ${
+                        offer.price.includes("€") ? "text-primary" : ""
+                      }`}
+                    >
+                      {offer.price}
+                    </p>
+                  </div>
                   {offer.text ? (
                     <p
                       className={`mt-3 text-sm ${offer.featured ? "text-secondary-foreground/70" : "text-muted-foreground"}`}
@@ -807,18 +820,27 @@ function Index() {
                     </p>
                   ) : null}
                   <ul className="mt-6 flex-1 space-y-3 text-sm">
-                    {offer.items.map((item) => {
+                    {offer.items.map((item, itemIndex) => {
                       const isObject = typeof item === "object" && item !== null;
                       const text = isObject ? (item as { text: string }).text : (item as string);
                       const type = isObject ? (item as { type: string }).type : "check";
+                      const prefix = isObject ? (item as { prefix?: string }).prefix : undefined;
+                      const suffix = isObject ? (item as { suffix?: string }).suffix : undefined;
                       const Icon = type === "gift" ? Gift : Check;
                       return (
-                        <li key={text} className="flex items-start gap-2.5">
+                        <li key={`${itemIndex}-${prefix || text}`} className="flex items-start gap-2.5">
                           <Icon
                             className={`mt-0.5 size-4 shrink-0 ${type === "gift" ? "text-primary" : "text-foreground"}`}
                             strokeWidth={2}
                           />
-                          <span className={type === "bold" ? "font-semibold" : ""}>{text}</span>
+                          <span className={type === "bold" ? "font-semibold" : ""}>
+                            {prefix ? <span className="font-semibold text-primary">{prefix}</span> : null}
+                            {prefix && (text || suffix) ? ": " : null}
+                            {text ? text : null}
+                            {suffix ? (
+                              <> <span className="text-muted-foreground line-through">{suffix}</span></>
+                            ) : null}
+                          </span>
                         </li>
                       );
                     })}

@@ -7,6 +7,7 @@ import {
   ArrowUpRight,
   ArrowUp,
   Check,
+  Gift,
   Instagram,
   MessageCircle,
   Play,
@@ -307,22 +308,28 @@ const TESTIMONIALS: {
 
 const OFFERS = [
   {
-    name: "Vidéo unique",
-    price: "Sur devis",
-    text: "Une publicité 15 à 30 s prête à diffuser.",
-    items: ["Script orienté conversion", "Motion design 2D", "3 formats de sortie", "2 révisions"],
+    name: "Forfait de base",
+    subtitle: "1 vidéo publicitaire",
+    price: "62€",
+    text: "",
+    items: [
+      { text: "Montage dynamique", type: "check" },
+      { text: "Révisions incluses", type: "check" },
+      { text: "Droit de diffusion 100%", type: "check" },
+      { text: "1 Format unique (au choix)", type: "check" },
+      { text: "Durée : 1 min maximun", type: "check" },
+      { text: "Script vidéo", type: "gift" },
+      { text: "Voix off", type: "gift" },
+      { text: "Mockup du produit", type: "gift" },
+      { text: "Livraison en 4 jours", type: "bold" },
+    ],
     featured: false,
   },
   {
     name: "Pack test créatif",
     price: "Sur devis",
     text: "Trois variations pour tester vos angles.",
-    items: [
-      "3 accroches différentes",
-      "Voix off incluse",
-      "Recommandations de diffusion",
-      "3 révisions",
-    ],
+    items: ["3 accroches différentes", "Voix off incluse", "Recommandations de diffusion", "3 révisions"],
     featured: true,
   },
   {
@@ -782,19 +789,39 @@ function Index() {
                   }`}
                 >
                   <h3 className="text-lg font-semibold">{offer.name}</h3>
-                  <p className="font-display mt-4 text-3xl font-semibold">{offer.price}</p>
+                  {offer.subtitle ? (
+                    <p className="mt-1 text-sm text-muted-foreground">{offer.subtitle}</p>
+                  ) : null}
                   <p
-                    className={`mt-3 text-sm ${offer.featured ? "text-secondary-foreground/70" : "text-muted-foreground"}`}
+                    className={`font-display mt-4 text-3xl font-semibold ${
+                      offer.price.includes("€") ? "text-primary" : ""
+                    }`}
                   >
-                    {offer.text}
+                    {offer.price}
                   </p>
+                  {offer.text ? (
+                    <p
+                      className={`mt-3 text-sm ${offer.featured ? "text-secondary-foreground/70" : "text-muted-foreground"}`}
+                    >
+                      {offer.text}
+                    </p>
+                  ) : null}
                   <ul className="mt-6 flex-1 space-y-3 text-sm">
-                    {offer.items.map((item) => (
-                      <li key={item} className="flex items-start gap-2.5">
-                        <Check className="mt-0.5 size-4 shrink-0 text-primary" strokeWidth={2} />
-                        {item}
-                      </li>
-                    ))}
+                    {offer.items.map((item) => {
+                      const isObject = typeof item === "object" && item !== null;
+                      const text = isObject ? (item as { text: string }).text : (item as string);
+                      const type = isObject ? (item as { type: string }).type : "check";
+                      const Icon = type === "gift" ? Gift : Check;
+                      return (
+                        <li key={text} className="flex items-start gap-2.5">
+                          <Icon
+                            className={`mt-0.5 size-4 shrink-0 ${type === "gift" ? "text-primary" : "text-foreground"}`}
+                            strokeWidth={2}
+                          />
+                          <span className={type === "bold" ? "font-semibold" : ""}>{text}</span>
+                        </li>
+                      );
+                    })}
                   </ul>
                   <div className="mt-8">
                     <WhatsAppButton>Demander un devis</WhatsAppButton>

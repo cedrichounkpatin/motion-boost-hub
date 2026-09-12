@@ -124,9 +124,14 @@ function AnimatedStat({
 
   return (
     <span className={complete ? "stat-number-complete" : undefined} aria-label={`${prefix}${value}${suffix}`}>
-      <span aria-hidden="true">
+      <span className="stat-number-animated" aria-hidden="true">
         {prefix}
         {displayValue}
+        {suffix}
+      </span>
+      <span className="stat-number-reduced" aria-hidden="true">
+        {prefix}
+        {value}
         {suffix}
       </span>
     </span>

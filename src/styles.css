@@ -227,6 +227,213 @@
   }
 }
 
+.stats-section {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.stats-ambient {
+  position: absolute;
+  z-index: -1;
+  inset: -45% -30%;
+  background: linear-gradient(
+    105deg,
+    transparent 32%,
+    color-mix(in oklab, var(--secondary-foreground) 8%, transparent) 47%,
+    color-mix(in oklab, var(--primary) 7%, transparent) 52%,
+    transparent 67%
+  );
+  transform: translateX(-28%);
+  animation: stats-ambient 9s ease-in-out infinite alternate;
+  filter: blur(34px);
+  pointer-events: none;
+}
+
+.stats-line {
+  position: absolute;
+  z-index: -1;
+  top: 50%;
+  left: 8%;
+  width: 84%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    color-mix(in oklab, var(--secondary-foreground) 13%, transparent),
+    color-mix(in oklab, var(--primary) 16%, transparent),
+    transparent
+  );
+  opacity: 0.45;
+  transform: scaleX(0.6);
+  animation: stats-line 7s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+.stats-grid {
+  position: relative;
+  z-index: 1;
+}
+
+.stat-card {
+  position: relative;
+  min-width: 0;
+  min-height: 8.5rem;
+  overflow: hidden;
+  border-radius: 0.5rem;
+  padding: 1px;
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 500ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 500ms cubic-bezier(0.16, 1, 0.3, 1),
+    filter 300ms ease;
+}
+
+.stat-card::before {
+  position: absolute;
+  inset: -80%;
+  content: "";
+  background: conic-gradient(
+    from 90deg,
+    transparent 0deg,
+    color-mix(in oklab, var(--secondary-foreground) 28%, transparent) 55deg,
+    color-mix(in oklab, var(--primary) 25%, transparent) 82deg,
+    transparent 120deg
+  );
+  animation: stats-border 8s linear infinite;
+}
+
+.stats-section[data-visible="true"] .stat-card {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.stats-section[data-visible="true"] .stat-card-2 {
+  transition-delay: 150ms;
+}
+
+.stats-section[data-visible="true"] .stat-card-3 {
+  transition-delay: 300ms;
+}
+
+.stats-section[data-visible="true"] .stat-card-4 {
+  transition-delay: 450ms;
+}
+
+.stat-card-inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  height: 100%;
+  min-height: calc(8.5rem - 2px);
+  flex-direction: column;
+  justify-content: flex-end;
+  overflow: hidden;
+  border: 1px solid color-mix(in oklab, var(--secondary-foreground) 5%, transparent);
+  border-radius: calc(0.5rem - 1px);
+  background: color-mix(in oklab, var(--secondary) 94%, var(--secondary-foreground) 6%);
+  padding: 1.25rem;
+  backdrop-filter: blur(18px);
+}
+
+.stat-card-inner::before {
+  position: absolute;
+  inset: 0;
+  content: "";
+  background: linear-gradient(
+    115deg,
+    transparent 15%,
+    color-mix(in oklab, var(--secondary-foreground) 5%, transparent) 50%,
+    transparent 72%
+  );
+  opacity: 0;
+  transform: translateX(-45%);
+  transition:
+    opacity 300ms ease,
+    transform 600ms cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+
+.stat-value {
+  position: relative;
+  font-size: clamp(2.25rem, 5vw, 3.5rem);
+  line-height: 0.95;
+  color: var(--secondary-foreground);
+  filter: brightness(1);
+  transition: filter 300ms ease;
+}
+
+.stat-label {
+  position: relative;
+  margin-top: 0.75rem;
+  max-width: 11rem;
+  color: color-mix(in oklab, var(--secondary-foreground) 62%, transparent);
+  font-size: 0.75rem;
+  line-height: 1.35;
+}
+
+@media (hover: hover) {
+  .stat-card:hover {
+    z-index: 2;
+    transform: scale(1.03);
+    filter: drop-shadow(0 10px 24px color-mix(in oklab, var(--secondary-foreground) 8%, transparent));
+  }
+
+  .stat-card:hover .stat-card-inner::before {
+    opacity: 1;
+    transform: translateX(45%);
+  }
+
+  .stat-card:hover .stat-value {
+    filter: brightness(1.18) drop-shadow(0 0 12px color-mix(in oklab, var(--secondary-foreground) 20%, transparent));
+  }
+}
+
+@keyframes stats-ambient {
+  to {
+    transform: translateX(28%);
+  }
+}
+
+@keyframes stats-line {
+  to {
+    opacity: 0.7;
+    transform: scaleX(1);
+  }
+}
+
+@keyframes stats-border {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 767px) {
+  .stats-ambient {
+    opacity: 0.55;
+    animation-duration: 12s;
+  }
+
+  .stats-line {
+    opacity: 0.25;
+  }
+
+  .stat-card {
+    min-height: 8rem;
+  }
+
+  .stat-card-inner {
+    min-height: calc(8rem - 2px);
+    padding: 1rem;
+  }
+
+  .stat-card::before {
+    opacity: 0.6;
+    animation-duration: 12s;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .reveal {
     opacity: 1;
@@ -246,6 +453,23 @@
 
   .animate-marquee {
     animation: none;
+  }
+
+  .stats-ambient,
+  .stats-line,
+  .stat-card::before {
+    animation: none;
+  }
+
+  .stat-card,
+  .stats-section[data-visible="true"] .stat-card {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .stat-card-inner::before {
+    display: none;
   }
 }
 

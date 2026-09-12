@@ -29,11 +29,7 @@ import workTemplate from "@/assets/work-template.jpg";
 import testimonial1 from "@/assets/testimonial-1.jpg";
 import testimonial2 from "@/assets/testimonial-2.jpg";
 import testimonial3 from "@/assets/testimonial-3.jpg";
-import trafficRing from "@/assets/traffic-motion/ring.png";
-import trafficMegaphone from "@/assets/traffic-motion/megaphone.png";
-import trafficEye from "@/assets/traffic-motion/eye.png";
-import trafficMoney from "@/assets/traffic-motion/money.png";
-import trafficAudience from "@/assets/traffic-motion/audience.png";
+import traficBannerAsset from "@/assets/trafic-2.png.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -630,16 +626,14 @@ function Index() {
         {/* Hero */}
         <section className="mx-auto max-w-6xl px-5 pt-20 pb-24 md:pt-28">
           <Reveal className="mx-auto max-w-3xl text-center">
-            <div
-              className="traffic-visual mx-auto mb-8 aspect-[66/57] w-[250px] sm:w-[330px]"
-              role="img"
-              aria-label="Illustration animée d'un mégaphone représentant le trafic, l'audience et les ventes"
-            >
-              <img src={trafficRing} alt="" className="traffic-ring" />
-              <img src={trafficMegaphone} alt="" className="traffic-megaphone" />
-              <img src={trafficEye} alt="" className="traffic-eye" />
-              <img src={trafficMoney} alt="" className="traffic-money" />
-              <img src={trafficAudience} alt="" className="traffic-audience" />
+            <div className="traffic-visual mx-auto mb-8 w-full max-w-2xl">
+              <img
+                src={traficBannerAsset.url}
+                alt="Illustration d'un mégaphone : plus de clics, plus de ventes, plus de trafic"
+                className="traffic-banner mx-auto w-full max-w-xl"
+                loading="eager"
+                decoding="async"
+              />
             </div>
             <h1 className="text-4xl leading-[1.05] font-semibold md:text-6xl">
               On crée des vidéos publicitaires en <span className="text-primary">motion design</span>

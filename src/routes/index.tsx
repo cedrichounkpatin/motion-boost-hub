@@ -29,7 +29,7 @@ import workTemplate from "@/assets/work-template.jpg";
 import testimonial1 from "@/assets/testimonial-1.jpg";
 import testimonial2 from "@/assets/testimonial-2.jpg";
 import testimonial3 from "@/assets/testimonial-3.jpg";
-import traficBannerAsset from "@/assets/trafic-2.png.asset.json";
+import traficMegaphoneAsset from "@/assets/trafic-megaphone.png.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -626,11 +626,11 @@ function Index() {
         {/* Hero */}
         <section className="mx-auto max-w-6xl px-5 pt-20 pb-24 md:pt-28">
           <Reveal className="mx-auto max-w-3xl text-center">
-            <div className="traffic-visual mx-auto mb-8 w-full max-w-2xl">
+            <div className="traffic-visual mx-auto mb-8">
               <img
-                src={traficBannerAsset.url}
-                alt="Illustration d'un mégaphone : plus de clics, plus de ventes, plus de trafic"
-                className="traffic-banner mx-auto w-full max-w-xl"
+                src={traficMegaphoneAsset.url}
+                alt="Mégaphone blanc et orange, symbole des vidéos publicitaires"
+                className="traffic-banner mx-auto w-[180px] sm:w-[230px]"
                 loading="eager"
                 decoding="async"
               />

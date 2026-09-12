@@ -61,9 +61,9 @@ const NAV = [
 
 const STATS = [
   { value: 180, prefix: "", suffix: "+", label: "vidéos livrées" },
-  { value: 7, prefix: "", suffix: " j", label: "délai moyen de livraison" },
-  { value: 42, prefix: "+", suffix: " %", label: "de taux de clic en moyenne" },
-  { value: 40, prefix: "", suffix: "+", label: "e-commerçants accompagnés" },
+  { value: 4, prefix: "0", suffix: " j", label: "délai moyen de livraison" },
+  { value: 52, prefix: "+", suffix: " %", label: "de taux de clic en moyenne" },
+  { value: 90, prefix: "", suffix: "+", label: "e-commerçants accompagnés" },
 ];
 
 const FILTERS = ["Tous", "Formation", "Ebook", "Template", "SaaS"] as const;
@@ -230,8 +230,8 @@ const PROCESS = [
   },
   {
     step: "05",
-    title: "Livraison multi-formats",
-    text: "16:9, 9:16 et 1:1 prêts pour Meta, TikTok, YouTube et votre page de vente.",
+    title: "Livraison au formats de votre choix",
+    text: "9:16 → Stories, Reels, TikTok, WhatsApp\n1:1 → Facebook, Instagram\n16:9 → YouTube, certains espaces publicitaires",
   },
 ];
 
@@ -818,11 +818,10 @@ function Index() {
                 <Zap className="size-3.5 text-primary" strokeWidth={2} />4 projets par mois maximum
               </p>
               <h2 className="mt-7 text-3xl font-semibold md:text-5xl">
-                Votre prochaine pub peut être en ligne dans 7 jours.
+                Votre produit est déjà bon
               </h2>
               <p className="mx-auto mt-5 max-w-lg text-secondary-foreground/70">
-                Décrivez votre produit en deux phrases. Je vous dis franchement si une vidéo peut
-                faire bouger vos chiffres — et ce qu'elle coûterait.
+                Maintenant, allons le rendre impossible à ignorer.
               </p>
               <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
                 <WhatsAppButton size="lg">Discutons sur WhatsApp</WhatsAppButton>

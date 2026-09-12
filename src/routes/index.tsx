@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import useEmblaCarousel, { type UseEmblaCarouselType } from "embla-carousel-react";
 import {
   ArrowLeft,
@@ -60,13 +60,107 @@ const NAV = [
 ];
 
 const STATS = [
-  { value: "180+", label: "vidéos livrées" },
-  { value: "7 j", label: "délai moyen de livraison" },
-  { value: "+42 %", label: "de taux de clic en moyenne" },
-  { value: "40+", label: "e-commerçants accompagnés" },
+  { value: 180, prefix: "", suffix: "+", label: "vidéos livrées" },
+  { value: 7, prefix: "", suffix: " j", label: "délai moyen de livraison" },
+  { value: 42, prefix: "+", suffix: " %", label: "de taux de clic en moyenne" },
+  { value: 40, prefix: "", suffix: "+", label: "e-commerçants accompagnés" },
 ];
 
 const FILTERS = ["Tous", "Formation", "Ebook", "Template", "SaaS"] as const;
+
+function AnimatedStat({
+  value,
+  prefix,
+  suffix,
+  active,
+}: {
+  value: number;
+  prefix: string;
+  suffix: string;
+  active: boolean;
+}) {
+  const [displayValue, setDisplayValue] = useState(0);
+
+  useEffect(() => {
+    if (!active) return;
+
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reducedMotion) {
+      setDisplayValue(value);
+      return;
+    }
+
+    const duration = window.matchMedia("(max-width: 767px)").matches ? 650 : 900;
+    const start = performance.now();
+    let frame = 0;
+
+    const count = (now: number) => {
+      const progress = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 4);
+      setDisplayValue(Math.round(value * eased));
+      if (progress < 1) frame = requestAnimationFrame(count);
+    };
+
+    frame = requestAnimationFrame(count);
+    return () => cancelAnimationFrame(frame);
+  }, [active, value]);
+
+  return (
+    <span aria-label={`${prefix}${value}${suffix}`}>
+      <span aria-hidden="true">
+        {prefix}
+        {displayValue}
+        {suffix}
+      </span>
+    </span>
+  );
+}
+
+function StatsSection() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry?.isIntersecting) {
+          setVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.25 },
+    );
+
+    observer.observe(section);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <section
+      ref={sectionRef}
+      className="stats-section bg-secondary text-secondary-foreground"
+      data-visible={visible ? "true" : "false"}
+    >
+      <div className="stats-ambient" aria-hidden="true" />
+      <div className="stats-line" aria-hidden="true" />
+      <div className="stats-grid mx-auto grid max-w-6xl grid-cols-2 gap-3 px-5 py-14 md:grid-cols-4 md:gap-4 md:py-16">
+        {STATS.map((stat, index) => (
+          <div key={stat.label} className={`stat-card stat-card-${index + 1}`}>
+            <div className="stat-card-inner">
+              <p className="stat-value font-display font-semibold">
+                <AnimatedStat {...stat} active={visible} />
+              </p>
+              <p className="stat-label">{stat.label}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
 
 const PROJECTS = [
   {
@@ -572,16 +666,7 @@ function Index() {
         </section>
 
         {/* Stats */}
-        <section className="bg-secondary text-secondary-foreground">
-          <div className="mx-auto grid max-w-6xl grid-cols-2 gap-10 px-5 py-16 md:grid-cols-4">
-            {STATS.map((stat, i) => (
-              <Reveal key={stat.label} delay={i * 80}>
-                <p className="font-display text-4xl font-semibold md:text-5xl">{stat.value}</p>
-                <p className="mt-2 text-sm text-secondary-foreground/60">{stat.label}</p>
-              </Reveal>
-            ))}
-          </div>
-        </section>
+        <StatsSection />
 
         {/* Portfolio */}
         <section id="portfolio" className="border-t border-border bg-muted/40">

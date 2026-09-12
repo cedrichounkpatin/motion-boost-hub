@@ -591,6 +591,35 @@ function TestimonialCarousel() {
   );
 }
 
+function Laurel({ mirrored = false }: { mirrored?: boolean }) {
+  return (
+    <svg
+      viewBox="0 0 72 104"
+      aria-hidden="true"
+      className={`h-16 w-11 shrink-0 text-primary sm:h-20 sm:w-14 ${mirrored ? "-scale-x-100" : ""}`}
+      fill="none"
+    >
+      <path
+        d="M57 9C33 22 19 47 18 76c0 8 2 15 6 21"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+      />
+      <g fill="currentColor">
+        <ellipse cx="49" cy="17" rx="5" ry="11" transform="rotate(43 49 17)" />
+        <ellipse cx="38" cy="29" rx="5" ry="11" transform="rotate(35 38 29)" />
+        <ellipse cx="29" cy="43" rx="5" ry="11" transform="rotate(25 29 43)" />
+        <ellipse cx="23" cy="59" rx="5" ry="11" transform="rotate(15 23 59)" />
+        <ellipse cx="21" cy="76" rx="5" ry="11" transform="rotate(5 21 76)" />
+        <ellipse cx="43" cy="36" rx="4.5" ry="10" transform="rotate(72 43 36)" />
+        <ellipse cx="34" cy="52" rx="4.5" ry="10" transform="rotate(62 34 52)" />
+        <ellipse cx="29" cy="69" rx="4.5" ry="10" transform="rotate(52 29 69)" />
+        <ellipse cx="29" cy="86" rx="4.5" ry="10" transform="rotate(42 29 86)" />
+      </g>
+    </svg>
+  );
+}
+
 function Index() {
   const [filter, setFilter] = useState<(typeof FILTERS)[number]>("Tous");
   const projects = PROJECTS.filter((p) => filter === "Tous" || p.tag === filter);
@@ -625,10 +654,17 @@ function Index() {
         {/* Hero */}
         <section className="mx-auto max-w-6xl px-5 pt-20 pb-24 md:pt-28">
           <Reveal className="mx-auto max-w-3xl text-center">
-            <p className="mb-6 inline-flex items-center gap-2 rounded-full border border-border px-4 py-1.5 text-xs tracking-wide text-muted-foreground uppercase">
-              <span className="size-1.5 rounded-full bg-primary" />
-              Motion design 2D · produits digitaux
-            </p>
+            <div className="mx-auto mb-8 flex w-full max-w-2xl items-center justify-center gap-3 bg-muted/60 px-3 py-5 sm:gap-8 sm:px-10 sm:py-6">
+              <Laurel />
+              <p className="min-w-0 flex-1 text-center text-sm leading-snug text-foreground sm:text-base">
+                <span className="block"><strong className="font-bold">TOP 1%</strong> en création</span>
+                <span className="block">
+                  de <strong className="font-bold">vidéos publicitaires</strong> pour les{" "}
+                  <strong className="font-bold">produits digitaux</strong>
+                </span>
+              </p>
+              <Laurel mirrored />
+            </div>
             <h1 className="text-4xl leading-[1.05] font-semibold md:text-6xl">
               On crée des vidéos publicitaires en <span className="text-primary">motion design</span>
             </h1>

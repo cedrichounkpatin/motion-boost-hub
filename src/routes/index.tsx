@@ -62,8 +62,8 @@ const NAV = [
 
 const STATS = [
   { value: 180, prefix: "", suffix: "+", label: "vidéos livrées" },
-  { value: 4, prefix: "0", suffix: " j", label: "délai moyen de livraison" },
-  { value: 52, prefix: "+", suffix: " %", label: "de taux de clic en moyenne" },
+  { value: 4, prefix: "0", suffix: "j", label: "délai moyen de livraison" },
+  { value: 52, prefix: "+", suffix: "%", label: "de taux de clic en moyenne" },
   { value: 90, prefix: "", suffix: "+", label: "e-commerçants accompagnés" },
 ];
 
@@ -74,43 +74,64 @@ function AnimatedStat({
   prefix,
   suffix,
   active,
+  delay,
 }: {
   value: number;
   prefix: string;
   suffix: string;
   active: boolean;
+  delay: number;
 }) {
   const [displayValue, setDisplayValue] = useState(0);
+  const [complete, setComplete] = useState(false);
 
   useEffect(() => {
-    if (!active) return;
-
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reducedMotion) {
       setDisplayValue(value);
+      setComplete(true);
       return;
     }
 
-    const duration = window.matchMedia("(max-width: 767px)").matches ? 650 : 900;
-    const start = performance.now();
+    if (!active) return;
+
+    const duration = 1200;
+    let start = 0;
     let frame = 0;
+    let timer = 0;
 
     const count = (now: number) => {
+      if (!start) start = now;
       const progress = Math.min((now - start) / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 4);
+      const eased = 1 - Math.pow(1 - progress, 3);
       setDisplayValue(Math.round(value * eased));
-      if (progress < 1) frame = requestAnimationFrame(count);
+      if (progress < 1) {
+        frame = requestAnimationFrame(count);
+      } else {
+        setComplete(true);
+      }
     };
 
-    frame = requestAnimationFrame(count);
-    return () => cancelAnimationFrame(frame);
-  }, [active, value]);
+    timer = window.setTimeout(() => {
+      frame = requestAnimationFrame(count);
+    }, delay);
+
+    return () => {
+      window.clearTimeout(timer);
+      cancelAnimationFrame(frame);
+    };
+  }, [active, delay, value]);
 
   return (
-    <span aria-label={`${prefix}${value}${suffix}`}>
-      <span aria-hidden="true">
+    <span className={complete ? "stat-number-complete" : undefined} aria-label={`${prefix}${value}${suffix}`}>
+      <span className="stat-number-animated" aria-hidden="true">
         {prefix}
         {displayValue}
+        {suffix}
+      </span>
+      <span className="stat-number-reduced" aria-hidden="true">
+        {prefix}
+        {value}
         {suffix}
       </span>
     </span>
@@ -152,7 +173,7 @@ function StatsSection() {
           <div key={stat.label} className={`stat-card stat-card-${index + 1}`}>
             <div className="stat-card-inner">
               <p className="stat-value font-display font-semibold">
-                <AnimatedStat {...stat} active={visible} />
+                <AnimatedStat {...stat} active={visible} delay={600 + index * 100} />
               </p>
               <p className="stat-label">{stat.label}</p>
             </div>

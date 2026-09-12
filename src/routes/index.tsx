@@ -308,22 +308,28 @@ const TESTIMONIALS: {
 
 const OFFERS = [
   {
-    name: "Vidéo unique",
-    price: "Sur devis",
-    text: "Une publicité 15 à 30 s prête à diffuser.",
-    items: ["Script orienté conversion", "Motion design 2D", "3 formats de sortie", "2 révisions"],
+    name: "Forfait de base",
+    subtitle: "1 vidéo publicitaire",
+    price: "62€",
+    text: "",
+    items: [
+      { text: "Montage dynamique", type: "check" },
+      { text: "Révisions incluses", type: "check" },
+      { text: "Droit de diffusion 100%", type: "check" },
+      { text: "1 Format unique (au choix)", type: "check" },
+      { text: "Durée : 1 min maximun", type: "check" },
+      { text: "Script vidéo", type: "gift" },
+      { text: "Voix off", type: "gift" },
+      { text: "Mockup du produit", type: "gift" },
+      { text: "Livraison en 4 jours", type: "bold" },
+    ],
     featured: false,
   },
   {
     name: "Pack test créatif",
     price: "Sur devis",
     text: "Trois variations pour tester vos angles.",
-    items: [
-      "3 accroches différentes",
-      "Voix off incluse",
-      "Recommandations de diffusion",
-      "3 révisions",
-    ],
+    items: ["3 accroches différentes", "Voix off incluse", "Recommandations de diffusion", "3 révisions"],
     featured: true,
   },
   {

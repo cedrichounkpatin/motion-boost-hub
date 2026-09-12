@@ -7,6 +7,7 @@ import {
   ArrowUpRight,
   ArrowUp,
   Check,
+  Gift,
   Instagram,
   MessageCircle,
   Play,

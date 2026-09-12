@@ -538,19 +538,7 @@ function Index() {
             <h1 className="text-4xl leading-[1.05] font-semibold md:text-6xl">
               On crée des vidéos publicitaires en <span className="text-primary">motion design</span>
             </h1>
-            <div className="mx-auto mt-6 flex max-w-2xl flex-wrap items-center justify-center gap-2">
-              {["Formation", "E-book", "Template", "Logiciel", "Application", "Fichiers numériques"].map(
-                (pill, i) => (
-                  <span
-                    key={pill}
-                    className="animate-pill inline-flex items-center rounded-full border border-border bg-background px-3 py-1 text-sm font-medium text-foreground"
-                    style={{ animationDelay: `${i * 80}ms` }}
-                  >
-                    {pill}
-                  </span>
-                ),
-              )}
-            </div>
+            <PillMarquee />
             <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg">
               Peu importe votre produit, on vous crée la vidéo publicitaire parfaite, du script à la
               version finale. Plus de trafic. Plus de clics. Plus de ventes, pendant que vous dormez

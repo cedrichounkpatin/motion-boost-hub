@@ -86,14 +86,14 @@ function AnimatedStat({
   const [complete, setComplete] = useState(false);
 
   useEffect(() => {
-    if (!active) return;
-
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reducedMotion) {
       setDisplayValue(value);
       setComplete(true);
       return;
     }
+
+    if (!active) return;
 
     const duration = 1200;
     let start = 0;

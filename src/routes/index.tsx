@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import useEmblaCarousel, { type UseEmblaCarouselType } from "embla-carousel-react";
 import {
   ArrowLeft,
@@ -60,10 +60,10 @@ const NAV = [
 ];
 
 const STATS = [
-  { value: "180+", label: "vidéos livrées" },
-  { value: "7 j", label: "délai moyen de livraison" },
-  { value: "+42 %", label: "de taux de clic en moyenne" },
-  { value: "40+", label: "e-commerçants accompagnés" },
+  { value: 180, prefix: "", suffix: "+", label: "vidéos livrées" },
+  { value: 7, prefix: "", suffix: " j", label: "délai moyen de livraison" },
+  { value: 42, prefix: "+", suffix: " %", label: "de taux de clic en moyenne" },
+  { value: 40, prefix: "", suffix: "+", label: "e-commerçants accompagnés" },
 ];
 
 const FILTERS = ["Tous", "Formation", "Ebook", "Template", "SaaS"] as const;

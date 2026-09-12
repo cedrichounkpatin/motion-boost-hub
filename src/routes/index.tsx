@@ -491,7 +491,7 @@ function Index() {
               </a>
             ))}
           </nav>
-          <WhatsAppButton href="#offres">
+          <WhatsAppButton>
             <span className="hidden sm:inline">Discutons sur WhatsApp</span>
             <span className="sm:hidden">WhatsApp</span>
           </WhatsAppButton>
@@ -528,7 +528,7 @@ function Index() {
               tranquillement.
             </p>
             <div className="mt-9 flex flex-col items-center gap-3">
-              <WhatsAppButton size="lg">Discutons de votre projet</WhatsAppButton>
+              <WhatsAppButton size="lg" href="#offres">Lancer mon projet vidéo</WhatsAppButton>
               <p className="text-sm text-muted-foreground">
                 <span className="font-semibold text-foreground">180+ vidéos livrées</span> pour 40+
                 e-commerçants digitaux

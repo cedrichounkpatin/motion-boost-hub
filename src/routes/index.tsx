@@ -424,7 +424,7 @@ function WhatsAppButton({
       href={href}
       target={isExternal ? "_blank" : undefined}
       rel={isExternal ? "noopener noreferrer" : undefined}
-      className={`relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-full bg-primary font-semibold text-primary-foreground shadow-[0_10px_25px_-5px_rgba(0,0,0,0.15)] ring-4 ring-white/20 transition-all duration-300 hover:-translate-y-0.5 hover:scale-105 hover:brightness-95 active:scale-95 ${
+      className={`relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-full bg-primary font-semibold text-primary-foreground shadow-[0_10px_25px_-5px_rgba(0,0,0,0.15)] transition-all duration-300 hover:-translate-y-0.5 hover:scale-105 hover:brightness-95 active:scale-95 ${
         size === "lg" ? "px-8 py-4 text-base" : "px-5 py-2.5 text-sm"
       }`}
     >
@@ -800,7 +800,7 @@ function Index() {
                 <div
                   className={`flex h-full flex-col rounded-xl border p-8 transition-all duration-300 hover:-translate-y-1 ${
                     offer.featured
-                      ? "border-primary bg-secondary text-secondary-foreground"
+                      ? "border-transparent bg-secondary text-secondary-foreground"
                       : "border-border bg-card hover:border-primary"
                   }`}
                 >

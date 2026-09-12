@@ -806,11 +806,11 @@ function Index() {
                 >
                   <h3 className="text-lg font-semibold">{offer.name}</h3>
                   {offer.subtitle ? (
-                    <p className="mt-1 text-sm text-muted-foreground">{offer.subtitle}</p>
+                    <p className={`mt-1 text-sm ${offer.featured ? "text-secondary-foreground/80" : "text-muted-foreground"}`}>{offer.subtitle}</p>
                   ) : null}
                   <div className="mt-4">
                     {offer.oldPrice ? (
-                      <p className="text-sm text-muted-foreground line-through">{offer.oldPrice}</p>
+                      <p className={`text-sm line-through ${offer.featured ? "text-secondary-foreground/70" : "text-muted-foreground"}`}>{offer.oldPrice}</p>
                     ) : null}
                     <p
                       className={`font-display text-3xl font-semibold ${
@@ -838,15 +838,15 @@ function Index() {
                       return (
                         <li key={`${itemIndex}-${prefix || text}`} className="flex items-start gap-2.5">
                           <Icon
-                            className={`mt-0.5 size-4 shrink-0 ${type === "gift" ? "text-primary" : "text-foreground"}`}
+                            className={`mt-0.5 size-4 shrink-0 ${offer.featured ? "text-secondary-foreground" : type === "gift" ? "text-primary" : "text-foreground"}`}
                             strokeWidth={2}
                           />
                           <span className={type === "bold" ? "font-semibold" : ""}>
-                            {prefix ? <span className="font-semibold text-primary">{prefix}</span> : null}
+                            {prefix ? <span className={`font-semibold ${offer.featured ? "text-secondary-foreground" : "text-primary"}`}>{prefix}</span> : null}
                             {prefix && (text || suffix) ? ": " : null}
                             {text ? text : null}
                             {suffix ? (
-                              <> <span className="text-muted-foreground line-through">{suffix}</span></>
+                              <> <span className={`line-through ${offer.featured ? "text-secondary-foreground/70" : "text-muted-foreground"}`}>{suffix}</span></>
                             ) : null}
                           </span>
                         </li>

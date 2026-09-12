@@ -789,19 +789,39 @@ function Index() {
                   }`}
                 >
                   <h3 className="text-lg font-semibold">{offer.name}</h3>
-                  <p className="font-display mt-4 text-3xl font-semibold">{offer.price}</p>
+                  {offer.subtitle ? (
+                    <p className="mt-1 text-sm text-muted-foreground">{offer.subtitle}</p>
+                  ) : null}
                   <p
-                    className={`mt-3 text-sm ${offer.featured ? "text-secondary-foreground/70" : "text-muted-foreground"}`}
+                    className={`font-display mt-4 text-3xl font-semibold ${
+                      offer.price.includes("€") ? "text-primary" : ""
+                    }`}
                   >
-                    {offer.text}
+                    {offer.price}
                   </p>
+                  {offer.text ? (
+                    <p
+                      className={`mt-3 text-sm ${offer.featured ? "text-secondary-foreground/70" : "text-muted-foreground"}`}
+                    >
+                      {offer.text}
+                    </p>
+                  ) : null}
                   <ul className="mt-6 flex-1 space-y-3 text-sm">
-                    {offer.items.map((item) => (
-                      <li key={item} className="flex items-start gap-2.5">
-                        <Check className="mt-0.5 size-4 shrink-0 text-primary" strokeWidth={2} />
-                        {item}
-                      </li>
-                    ))}
+                    {offer.items.map((item) => {
+                      const isObject = typeof item === "object" && item !== null;
+                      const text = isObject ? (item as { text: string }).text : (item as string);
+                      const type = isObject ? (item as { type: string }).type : "check";
+                      const Icon = type === "gift" ? Gift : Check;
+                      return (
+                        <li key={text} className="flex items-start gap-2.5">
+                          <Icon
+                            className={`mt-0.5 size-4 shrink-0 ${type === "gift" ? "text-primary" : "text-foreground"}`}
+                            strokeWidth={2}
+                          />
+                          <span className={type === "bold" ? "font-semibold" : ""}>{text}</span>
+                        </li>
+                      );
+                    })}
                   </ul>
                   <div className="mt-8">
                     <WhatsAppButton>Demander un devis</WhatsAppButton>

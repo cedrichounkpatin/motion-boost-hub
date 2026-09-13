@@ -799,28 +799,28 @@ function Index() {
                 <div
                   className={`flex h-full flex-col rounded-xl border p-8 transition-all duration-300 hover:-translate-y-1 ${
                     offer.featured
-                      ? "border-transparent bg-card text-foreground"
+                      ? "border-transparent bg-black text-white"
                       : "border-border bg-card hover:border-primary"
                   }`}
                 >
-                  <h3 className="text-lg font-semibold text-foreground">{offer.name}</h3>
+                  <h3 className={`text-lg font-semibold ${offer.featured ? "text-white" : "text-foreground"}`}>{offer.name}</h3>
                   {offer.subtitle ? (
-                    <p className="mt-1 text-sm text-foreground">{offer.subtitle}</p>
+                    <p className={`mt-1 text-sm ${offer.featured ? "text-white" : "text-foreground"}`}>{offer.subtitle}</p>
                   ) : null}
                   <div className="mt-4">
                     {offer.oldPrice ? (
-                      <p className="text-sm line-through text-foreground">{offer.oldPrice}</p>
+                      <p className={`text-sm line-through ${offer.featured ? "text-white/80" : "text-foreground"}`}>{offer.oldPrice}</p>
                     ) : null}
                     <p
                       className={`font-display text-3xl font-semibold ${
-                        offer.price.includes("€") ? "text-primary" : "text-foreground"
+                        offer.price.includes("€") ? "text-primary" : offer.featured ? "text-white" : "text-foreground"
                       }`}
                     >
                       {offer.price}
                     </p>
                   </div>
                   {offer.text ? (
-                    <p className="mt-3 text-sm text-foreground">
+                    <p className={`mt-3 text-sm ${offer.featured ? "text-white" : "text-foreground"}`}>
                       {offer.text}
                     </p>
                   ) : null}
@@ -835,15 +835,15 @@ function Index() {
                       return (
                         <li key={`${itemIndex}-${prefix || text}`} className="flex items-start gap-2.5">
                           <Icon
-                            className={`mt-0.5 size-4 shrink-0 ${type === "gift" ? "text-primary" : "text-foreground"}`}
+                            className={`mt-0.5 size-4 shrink-0 ${offer.featured ? "text-white" : type === "gift" ? "text-primary" : "text-foreground"}`}
                             strokeWidth={2}
                           />
-                          <span className={`text-foreground ${type === "bold" ? "font-semibold" : ""}`}>
-                            {prefix ? <span className="font-semibold text-foreground">{prefix}</span> : null}
+                          <span className={`${offer.featured ? "text-white" : "text-foreground"} ${type === "bold" ? "font-semibold" : ""}`}>
+                            {prefix ? <span className={`font-semibold ${offer.featured ? "text-white" : "text-foreground"}`}>{prefix}</span> : null}
                             {prefix && (text || suffix) ? ": " : null}
                             {text ? text : null}
                             {suffix ? (
-                              <> <span className="line-through text-foreground">{suffix}</span></>
+                              <> <span className={`line-through ${offer.featured ? "text-white/80" : "text-foreground"}`}>{suffix}</span></>
                             ) : null}
                           </span>
                         </li>

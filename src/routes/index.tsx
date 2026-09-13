@@ -347,7 +347,6 @@ const OFFERS = [
      oldPrice: "",
     text: "",
     items: [
-        { text: "60€/vidéo ", type: "check", prefix: "", suffix: "" },
          { text: "Pour chaque vidéo publicitaire livrée, vous recevez 2 affiches publicitaires animées différentes, adaptées à votre communication.  ", type: "check", prefix: "+2 Deux affiches publicitaires animées/Vidéo ", suffix: "[40 €/Vidéo]" },
         { text: "Pour chaque créative, vous recevez 1 textes publicitaires (Copywriting optimisé) ", type: "check", prefix: "+3 Textes publicitaire ", suffix: "[30€/Vidéo]" },
        { text: "Une page de vente prête à copier coller", type: "gift", prefix: "1 page de vente", suffix: "[35€]" },

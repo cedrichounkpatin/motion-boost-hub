@@ -867,7 +867,7 @@ function Index() {
                       return (
                         <li key={`${itemIndex}-${prefix || text}`} className="flex items-start gap-2.5">
                           <Icon
-                            className={`mt-0.5 size-4 shrink-0 ${offer.featured ? "text-white" : type === "gift" ? "text-primary" : "text-foreground"}`}
+                            className={`mt-0.5 size-4 shrink-0 ${offer.featured ? "text-white" : "text-foreground"}`}
                             strokeWidth={2}
                           />
                           <span className={`${offer.featured ? "text-white" : "text-foreground"} ${type === "bold" ? "font-semibold" : ""}`}>

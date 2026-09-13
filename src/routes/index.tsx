@@ -410,14 +410,29 @@ function PillMarquee() {
   );
 }
 
+function WhatsAppIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      aria-hidden="true"
+    >
+      <path d="M12 2C6.48 2 2 6.48 2 12c0 1.9.53 3.67 1.45 5.2L2 22l4.95-1.36A9.93 9.93 0 0 0 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm4.93 13.89c-.2.56-1.13 1.06-1.57 1.13-.42.06-.84.2-2.8-.59-2.37-.95-3.89-3.43-4.01-3.58-.12-.16-.96-1.27-.96-2.43 0-1.16.61-1.73.83-1.97.22-.24.49-.3.66-.3.16 0 .33 0 .47.01.17 0 .39-.06.6.46.22.53.76 1.85.83 1.98.08.14.12.3.02.48-.1.18-.15.29-.3.45-.15.16-.31.34-.44.45-.14.12-.29.25-.12.49.17.24.76 1.25 1.63 2.02 1.12 1 2.06 1.31 2.36 1.45.3.14.47.12.65-.07.18-.2.75-.88.95-1.18.2-.3.4-.25.65-.15.25.1 1.58.75 1.85.88.28.13.46.2.53.31.06.11.06.64-.14 1.2z" />
+    </svg>
+  );
+}
+
 function WhatsAppButton({
   children,
   size = "default",
   href = WHATSAPP_URL,
+  icon = <MessageCircle className="size-4" strokeWidth={1.75} />,
 }: {
   children: React.ReactNode;
   size?: "default" | "lg";
   href?: string;
+  icon?: React.ReactNode;
 }) {
   const isExternal = href.startsWith("http");
   return (
@@ -431,7 +446,7 @@ function WhatsAppButton({
     >
       <span className="pointer-events-none absolute inset-0 z-0 w-1/3 bg-gradient-to-r from-transparent via-white/40 to-transparent animate-shine" />
       <span className="relative z-10 flex items-center justify-center gap-2">
-        <MessageCircle className="size-4" strokeWidth={1.75} />
+        {icon}
         {children}
       </span>
     </a>

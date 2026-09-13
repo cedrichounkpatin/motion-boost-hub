@@ -455,6 +455,48 @@ function WhatsAppButton({
   );
 }
 
+function WhatsAppChatPreview() {
+  return (
+    <div className="mx-auto mb-10 w-full max-w-[340px] overflow-hidden rounded-[28px] border-[5px] border-white/15 bg-white shadow-2xl shadow-black/25">
+      <div className="flex items-center gap-2.5 bg-[#075E54] px-4 py-3">
+        <div className="flex h-8 w-8 items-center justify-center rounded-full bg-[#25D366] text-white">
+          <WhatsAppIcon className="size-4" />
+        </div>
+        <div className="flex flex-col">
+          <span className="text-sm font-semibold text-white">Motion Design 2D</span>
+          <span className="text-[10px] text-white/70">en ligne</span>
+        </div>
+      </div>
+      <div
+        className="px-4 py-6"
+        style={{
+          backgroundColor: "#E5DDD5",
+          backgroundImage: "radial-gradient(circle, #D4D0C8 1.5px, transparent 1.5px)",
+          backgroundSize: "18px 18px",
+        }}
+      >
+        <div className="flex items-end justify-end gap-2">
+          <div className="relative max-w-[88%] rounded-2xl rounded-tr-sm bg-[#DCF8C6] px-4 py-3 text-left shadow-sm">
+            <p className="text-[14px] leading-snug text-[#111B21]">
+              Hello, je suis {"{Votre nom}"}. Je souhaite réaliser une vidéo publicitaire pour mon{" "}
+              {"{type de produit}"}.
+            </p>
+            <div className="mt-1 flex items-center justify-end gap-1">
+              <span className="text-[10px] text-[#667781]">12:34</span>
+              <svg className="size-3 text-[#53BDEB]" viewBox="0 0 16 11" fill="currentColor" aria-hidden="true">
+                <path d="M10.7 1.3L6 6 4.3 4.3c-.4-.4-1-.4-1.4 0-.4.4-.4 1 0 1.4l2.7 2.7c.2.2.4.3.7.3.3 0 .5-.1.7-.3l5.7-5.7c.4-.4.4-1 0-1.4-.4-.4-1-.4-1.4 0zM4.7 8.3L3 6.6c-.4-.4-1-.4-1.4 0-.4.4-.4 1 0 1.4l2.7 2.7c.2.2.4.3.7.3.3 0 .5-.1.7-.3l7.7-7.7c.4-.4.4-1 0-1.4-.4-.4-1-.4-1.4 0L6 10 4.7 8.3z" />
+              </svg>
+            </div>
+          </div>
+          <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#25D366] text-white shadow-md">
+            <WhatsAppIcon className="size-4" />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 type CarouselApi = UseEmblaCarouselType[1];
 
 function CarouselNavigation({

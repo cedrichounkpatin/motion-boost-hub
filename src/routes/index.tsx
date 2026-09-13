@@ -11,6 +11,7 @@ import {
   Instagram,
   MessageCircle,
   Play,
+  Star,
   Zap,
 } from "lucide-react";
 import {

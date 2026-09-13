@@ -805,6 +805,14 @@ function Index() {
                   }`}
                 >
                   <h3 className={`text-lg font-semibold ${offer.featured ? "text-white" : "text-foreground"}`}>{offer.name}</h3>
+                  {offer.featured ? (
+                    <div className="mt-2 inline-flex items-center gap-1 self-start rounded-full bg-primary px-2.5 py-1 text-xs font-semibold text-black">
+                      <Star className="size-3 fill-current" />
+                      <Star className="size-3 fill-current" />
+                      <Star className="size-3 fill-current" />
+                      <span>Le plus populaire</span>
+                    </div>
+                  ) : null}
                   {offer.subtitle ? (
                     <p className={`mt-1 text-sm ${offer.featured ? "text-white" : "text-foreground"}`}>{offer.subtitle}</p>
                   ) : null}

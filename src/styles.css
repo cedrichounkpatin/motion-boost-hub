@@ -522,6 +522,10 @@
     animation: none;
   }
 
+  .animate-shake {
+    animation: none;
+  }
+
   .traffic-banner {
     animation: none;
   }

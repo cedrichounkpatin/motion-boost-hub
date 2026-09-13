@@ -883,7 +883,20 @@ function Index() {
                     })}
                   </ul>
                   <div className="mt-8">
-                    <WhatsAppButton>Demander un devis</WhatsAppButton>
+                    <WhatsAppButton
+                      href="#cta-final"
+                      icon={
+                        i === 0 ? (
+                          <MessageCircle className="size-4" strokeWidth={1.75} />
+                        ) : i === 1 ? (
+                          <Star className="size-4" strokeWidth={1.75} />
+                        ) : (
+                          <Zap className="size-4" strokeWidth={1.75} />
+                        )
+                      }
+                    >
+                      Parlons de votre projet
+                    </WhatsAppButton>
                   </div>
                 </div>
               </Reveal>

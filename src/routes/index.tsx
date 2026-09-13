@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useCallback, useEffect, useRef, useState } from "react";
 import useEmblaCarousel, { type UseEmblaCarouselType } from "embla-carousel-react";
 import {
+  ArrowDown,
   ArrowLeft,
   ArrowRight,
   ArrowUpRight,
@@ -691,6 +692,13 @@ function Index() {
             </p>
             <div className="mt-9 flex flex-col items-center gap-3">
               <WhatsAppButton size="lg" href="#offres">Lancer mon projet vidéo</WhatsAppButton>
+              <a
+                href="#portfolio"
+                className="inline-flex items-center justify-center gap-2 rounded-full border border-foreground/15 bg-background px-6 py-3 text-sm font-semibold text-foreground transition-all duration-300 hover:-translate-y-0.5 hover:border-foreground/30 hover:bg-muted active:scale-95"
+              >
+                Voir nos réalisations
+                <ArrowDown className="size-4" strokeWidth={1.75} />
+              </a>
               <p className="text-sm text-muted-foreground">
                 <span className="font-semibold text-foreground">180+ vidéos livrées</span> pour 90+
                 e-commerçants digitaux

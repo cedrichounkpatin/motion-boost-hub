@@ -677,7 +677,7 @@ function Index() {
               </a>
             ))}
           </nav>
-          <WhatsAppButton className="bg-[#25D366] text-white shadow-[0_0_14px_rgba(37,211,102,0.55),0_0_28px_rgba(37,211,102,0.35)] animate-shake hover:brightness-105">
+          <WhatsAppButton className="!bg-[#25D366] !text-white !shadow-[0_0_14px_rgba(37,211,102,0.55),0_0_28px_rgba(37,211,102,0.35)] animate-shake !hover:brightness-105">
             <span className="hidden sm:inline">Discutons sur WhatsApp</span>
             <span className="sm:hidden">WhatsApp</span>
           </WhatsAppButton>

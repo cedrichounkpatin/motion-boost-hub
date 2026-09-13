@@ -428,11 +428,13 @@ function WhatsAppButton({
   size = "default",
   href = WHATSAPP_URL,
   icon = <MessageCircle className="size-4" strokeWidth={1.75} />,
+  className = "",
 }: {
   children: React.ReactNode;
   size?: "default" | "lg";
   href?: string;
   icon?: React.ReactNode;
+  className?: string;
 }) {
   const isExternal = href.startsWith("http");
   return (
@@ -442,7 +444,7 @@ function WhatsAppButton({
       rel={isExternal ? "noopener noreferrer" : undefined}
       className={`relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-full bg-primary font-semibold text-primary-foreground shadow-[0_10px_25px_-5px_rgba(0,0,0,0.15)] transition-all duration-300 hover:-translate-y-0.5 hover:scale-105 hover:brightness-95 active:scale-95 ${
         size === "lg" ? "px-8 py-4 text-base" : "px-5 py-2.5 text-sm"
-      }`}
+      } ${className}`}
     >
       <span className="pointer-events-none absolute inset-0 z-0 w-1/3 bg-gradient-to-r from-transparent via-white/40 to-transparent animate-shine" />
       <span className="relative z-10 flex items-center justify-center gap-2">
@@ -675,7 +677,7 @@ function Index() {
               </a>
             ))}
           </nav>
-          <WhatsAppButton>
+          <WhatsAppButton className="!bg-[#25D366] !text-white !shadow-[0_0_14px_rgba(37,211,102,0.55),0_0_28px_rgba(37,211,102,0.35)] animate-shake !hover:brightness-105">
             <span className="hidden sm:inline">Discutons sur WhatsApp</span>
             <span className="sm:hidden">WhatsApp</span>
           </WhatsAppButton>

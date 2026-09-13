@@ -938,7 +938,7 @@ function Index() {
         </section>
 
         {/* CTA final */}
-        <section className="bg-secondary text-secondary-foreground">
+        <section id="cta-final" className="bg-secondary text-secondary-foreground">
           <div className="mx-auto max-w-3xl px-5 py-24 text-center">
             <Reveal>
               <p className="inline-flex items-center gap-2 rounded-full border border-secondary-foreground/20 px-4 py-1.5 text-xs tracking-wide uppercase">
@@ -951,16 +951,9 @@ function Index() {
                 Maintenant, allons le rendre impossible à ignorer.
               </p>
               <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-                <WhatsAppButton size="lg">Discutons sur WhatsApp</WhatsAppButton>
-                <a
-                  href={INSTAGRAM_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 rounded-full border border-secondary-foreground/25 px-8 py-4 text-base font-semibold transition-colors duration-300 hover:border-primary hover:text-primary"
-                >
-                  <Instagram className="size-4" strokeWidth={1.75} />
-                  Écrire en DM Instagram
-                </a>
+                <WhatsAppButton size="lg" icon={<WhatsAppIcon className="size-5" />}>
+                  Discutons sur WhatsApp
+                </WhatsAppButton>
               </div>
               <p className="mt-6 text-sm text-secondary-foreground/50">
                 Réponse sous 12 h en semaine.

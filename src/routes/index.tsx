@@ -705,8 +705,20 @@ function Index() {
       {/* Header */}
       <header className="sticky top-0 z-50 border-b border-border bg-background/90 backdrop-blur">
         <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5">
-          <a href="#top" className="font-display text-lg font-semibold tracking-tight">
-            Motion design 2D
+          <a
+            href="#top"
+            className="inline-flex items-center gap-1 rounded-full border border-primary bg-background px-3 py-1.5 font-display text-sm font-semibold tracking-tight transition-colors hover:bg-muted/30"
+          >
+            <span className="text-foreground">Motion</span>
+            <span className="text-primary">Design</span>
+            <span className="text-foreground">2D</span>
+            <span className="relative ml-1 flex h-7 w-7 shrink-0 items-center justify-center overflow-hidden rounded-full bg-primary">
+              <img
+                src={traficMegaphoneAsset.url}
+                alt=""
+                className="h-5 w-5 object-contain"
+              />
+            </span>
           </a>
           <nav className="hidden items-center gap-8 md:flex">
             {NAV.map((item) => (

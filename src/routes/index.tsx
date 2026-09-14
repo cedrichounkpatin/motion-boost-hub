@@ -994,6 +994,7 @@ function Index() {
               <p className="mx-auto mt-5 max-w-lg text-secondary-foreground/70">
                 Maintenant, allons le rendre impossible à ignorer.
               </p>
+              <WhatsAppChatPreview />
               <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
                 <WhatsAppButton size="lg" icon={<WhatsAppIcon className="size-5" />}>
                   Discutons sur WhatsApp

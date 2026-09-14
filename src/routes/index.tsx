@@ -640,7 +640,6 @@ function TestimonialCarousel() {
                     Témoignage vidéo
                   </span>
                 </figcaption>
-                </div>
               </div>
             </figure>
           ))}

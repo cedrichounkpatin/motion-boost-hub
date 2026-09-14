@@ -32,6 +32,8 @@ import workTemplate from "@/assets/work-template.jpg";
 import testimonial1 from "@/assets/testimonial-1.jpg";
 import testimonial2 from "@/assets/testimonial-2.jpg";
 import testimonial3 from "@/assets/testimonial-3.jpg";
+import testimonial4 from "@/assets/testimonial-4.jpg";
+import testimonial5 from "@/assets/testimonial-5.jpg";
 import traficMegaphoneAsset from "@/assets/trafic-megaphone.png.asset.json";
 
 export const Route = createFileRoute("/")({
@@ -261,50 +263,34 @@ const PROCESS = [
 ];
 
 const TESTIMONIALS: {
-  quote: string;
   name: string;
   company: string;
-  image?: string;
-  video?: boolean;
+  image: string;
 }[] = [
   {
-    quote:
-      "La vidéo a remplacé notre ancienne pub en 48 h. Le coût par lead est passé de 4,10 € à 2,30 €.",
-    name: "Amélie R.",
-    company: "Studio Éditions",
-  },
-  {
-    quote:
-      "Il comprend les produits digitaux mieux que la plupart des agences. Le script était déjà une stratégie.",
-    name: "Yanis B.",
-    company: "Trackly",
-  },
-  {
-    quote: "Trois formats livrés en une semaine, zéro aller-retour inutile. On a scalé direct.",
-    name: "Sarah M.",
-    company: "Nova Health",
-  },
-  {
-    quote:
-      "On a doublé les ventes de notre formation en un mois grâce à la nouvelle vidéo publicitaire.",
     name: "Claire D.",
     company: "Académie Lumen",
     image: testimonial1,
-    video: true,
   },
   {
-    quote: "La vidéo explique notre SaaS en 20 secondes mieux que notre page de vente entière.",
     name: "Malik T.",
     company: "Flowdesk",
     image: testimonial2,
-    video: true,
   },
   {
-    quote: "Nos templates se vendent enfin. Le script et le rythme font toute la différence.",
     name: "Grace A.",
     company: "Pixel Market",
     image: testimonial3,
-    video: true,
+  },
+  {
+    name: "Nadia K.",
+    company: "Digital Impact",
+    image: testimonial4,
+  },
+  {
+    name: "David A.",
+    company: "Growth Factory",
+    image: testimonial5,
   },
 ];
 
@@ -630,62 +616,30 @@ function TestimonialCarousel() {
               key={testimonial.name}
               className="min-w-0 flex-[0_0_90%] pl-4 sm:flex-[0_0_62%] md:pl-6 lg:flex-[0_0_46%]"
             >
-              <div className="group flex h-full min-h-64 flex-col overflow-hidden rounded-lg border border-border bg-card transition-all duration-300 hover:-translate-y-1 hover:border-primary hover:shadow-lg">
-                {testimonial.image ? (
-                  <div className="relative aspect-video overflow-hidden bg-secondary">
-                    <img
-                      src={testimonial.image}
-                      alt={`Témoignage vidéo de ${testimonial.name}`}
-                      loading="lazy"
-                      width={800}
-                      height={800}
-                      className="size-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
-                    {testimonial.video ? (
-                      <>
-                        <span className="absolute inset-0 bg-black/25" />
-                        <span className="absolute inset-0 flex items-center justify-center">
-                          <span className="flex size-14 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-lg transition-transform duration-300 group-hover:scale-110">
-                            <Play className="size-5" strokeWidth={1.75} />
-                          </span>
-                        </span>
-                        <span className="absolute bottom-3 left-3 rounded-full bg-background/90 px-3 py-1 text-xs font-medium">
-                          Témoignage vidéo
-                        </span>
-                      </>
-                    ) : null}
-                  </div>
-                ) : null}
-                <div className="flex flex-1 flex-col justify-between p-8 md:p-10">
-                  <div>
-                    <span className="font-display text-5xl leading-none text-primary">“</span>
-                    <blockquote className="mt-4 text-lg leading-relaxed text-foreground md:text-xl">
-                      {testimonial.quote}
-                    </blockquote>
-                  </div>
-                  <figcaption className="mt-8 flex items-center gap-3 text-sm text-muted-foreground">
-                    <span className="flex size-10 items-center justify-center overflow-hidden rounded-full bg-secondary font-semibold text-secondary-foreground">
-                      {testimonial.image ? (
-                        <img
-                          src={testimonial.image}
-                          alt=""
-                          loading="lazy"
-                          width={800}
-                          height={800}
-                          className="size-full object-cover"
-                        />
-                      ) : (
-                        testimonial.name.charAt(0)
-                      )}
-                    </span>
-                    <span>
-                      <strong className="block font-semibold text-foreground">
-                        {testimonial.name}
-                      </strong>
-                      {testimonial.company}
-                    </span>
-                  </figcaption>
-                </div>
+              <div className="group relative aspect-video overflow-hidden rounded-lg border border-border bg-secondary transition-all duration-300 hover:-translate-y-1 hover:border-primary hover:shadow-lg">
+                <img
+                  src={testimonial.image}
+                  alt={`Témoignage vidéo de ${testimonial.name}`}
+                  loading="lazy"
+                  width={1280}
+                  height={720}
+                  className="size-full object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+                <span className="absolute inset-0 bg-black/25" />
+                <span className="absolute inset-0 flex items-center justify-center">
+                  <span className="flex size-14 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-lg transition-transform duration-300 group-hover:scale-110">
+                    <Play className="size-5" strokeWidth={1.75} />
+                  </span>
+                </span>
+                <figcaption className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-3 bg-gradient-to-t from-black/80 to-transparent px-5 pt-12 pb-4 text-white">
+                  <span>
+                    <strong className="block text-sm font-semibold">{testimonial.name}</strong>
+                    <span className="text-xs text-white/75">{testimonial.company}</span>
+                  </span>
+                  <span className="rounded-full bg-background/90 px-3 py-1 text-xs font-medium text-foreground">
+                    Témoignage vidéo
+                  </span>
+                </figcaption>
               </div>
             </figure>
           ))}
@@ -731,9 +685,11 @@ function Index() {
               </a>
             ))}
           </nav>
-          <WhatsAppButton className="!bg-[#25D366] !text-white !shadow-[0_0_14px_rgba(37,211,102,0.55),0_0_28px_rgba(37,211,102,0.35)] animate-shake !hover:brightness-105">
-            <span className="hidden sm:inline">Discutons sur WhatsApp</span>
-            <span className="sm:hidden">WhatsApp</span>
+          <WhatsAppButton
+            icon={<WhatsAppIcon className="size-6" />}
+            className="!size-11 !bg-[#25D366] !p-0 !text-white !shadow-[0_0_14px_rgba(37,211,102,0.55),0_0_28px_rgba(37,211,102,0.35)] animate-shake !hover:brightness-105"
+          >
+            <span className="sr-only">Discutons sur WhatsApp</span>
           </WhatsAppButton>
         </div>
       </header>

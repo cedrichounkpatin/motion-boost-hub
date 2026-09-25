@@ -14,6 +14,7 @@ import {
   Play,
   Star,
   Zap,
+  X,
 } from "lucide-react";
 import {
   Accordion,
@@ -24,16 +25,6 @@ import {
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/site/reveal";
 import { WHATSAPP_URL, INSTAGRAM_URL } from "@/components/site/contact";
-import showreel from "@/assets/showreel.jpg";
-import workCourse from "@/assets/work-course.jpg";
-import workSaas from "@/assets/work-saas2.jpg";
-import workEbook from "@/assets/work-ebook.jpg";
-import workTemplate from "@/assets/work-template.jpg";
-import testimonial1 from "@/assets/testimonial-1.jpg";
-import testimonial2 from "@/assets/testimonial-2.jpg";
-import testimonial3 from "@/assets/testimonial-3.jpg";
-import testimonial4 from "@/assets/testimonial-4.jpg";
-import testimonial5 from "@/assets/testimonial-5.jpg";
 import traficMegaphoneAsset from "@/assets/trafic-megaphone.png.asset.json";
 
 export const Route = createFileRoute("/")({
@@ -190,47 +181,72 @@ function StatsSection() {
 }
 
 const PROJECTS = [
+  // Les formations
   {
-    title: "Lancement d'une formation copywriting",
+    title: "Lancement formation copywriting",
     client: "Studio Éditions",
-    goal: "Vidéo Meta Ads de 30 s — 3 200 inscrits en 3 semaines.",
+    goal: "Format dynamique 9:16 — 3 200 inscrits en 3 semaines.",
     tag: "Formation",
-    image: workCourse,
-  },
-  {
-    title: "Démo produit d'un SaaS analytics",
-    client: "Trackly",
-    goal: "Explainer 45 s — coût par essai divisé par 2.",
-    tag: "SaaS",
-    image: workSaas,
-  },
-  {
-    title: "Promo ebook nutrition",
-    client: "Nova Health",
-    goal: "Reel vertical 15 s — 1 900 ventes sur le trimestre.",
-    tag: "Ebook",
-    image: workEbook,
-  },
-  {
-    title: "Pack de templates Notion",
-    client: "Deskly",
-    goal: "Séquence produit 20 s — +61 % de clics sur la page de vente.",
-    tag: "Template",
-    image: workTemplate,
+    youtubeId: "ssZ5HJ_6rd4",
   },
   {
     title: "Tunnel de vente masterclass",
     client: "Atelier Média",
-    goal: "3 variations testées — CPA en baisse de 38 %.",
+    goal: "Short pub percutant — CPA en baisse de 38 %.",
     tag: "Formation",
-    image: workTemplate,
+    youtubeId: "cmbmqBv-QSQ",
+  },
+  // Les ebook
+  {
+    title: "Promo ebook nutrition & santé",
+    client: "Nova Health",
+    goal: "Reel vertical 15 s — 1 900 ventes sur le trimestre.",
+    tag: "Ebook",
+    youtubeId: "RpfmWnlTDDM",
   },
   {
-    title: "Onboarding animé d'un outil no-code",
-    client: "Flowbase",
-    goal: "Vidéo d'accueil 60 s — churn J7 réduit de 22 %.",
+    title: "Guide digital & productivité",
+    client: "Peak Mind",
+    goal: "Format court dynamique — boost de conversion immédiat.",
+    tag: "Ebook",
+    youtubeId: "fz-BbiD5pcs",
+  },
+  // Les Saas
+  {
+    title: "Démo produit SaaS analytics",
+    client: "Trackly",
+    goal: "Explainer 30 s — coût par essai divisé par 2.",
     tag: "SaaS",
-    image: workSaas,
+    youtubeId: "3O64mrM-PJ0",
+  },
+  {
+    title: "Onboarding animé outil no-code",
+    client: "Flowbase",
+    goal: "Vidéo d'accueil — churn J7 réduit de 22 %.",
+    tag: "SaaS",
+    youtubeId: "S4utLfMjmKA",
+  },
+  // Les template
+  {
+    title: "Pack de templates Notion Pro",
+    client: "Deskly",
+    goal: "Séquence produit 20 s — +61 % de clics sur la page de vente.",
+    tag: "Template",
+    youtubeId: "WFoWHanVcY8",
+  },
+  {
+    title: "Templates d'organisation & finance",
+    client: "Workspace Pro",
+    goal: "Animation de démonstration — +45 % de taux d'achat.",
+    tag: "Template",
+    youtubeId: "uIzJ1V2dOA0",
+  },
+  {
+    title: "Système de productivité Notion",
+    client: "FocusLab",
+    goal: "Mise en avant des fonctionnalités clés en format court.",
+    tag: "Template",
+    youtubeId: "7eJwowR__u0",
   },
 ];
 
@@ -262,36 +278,13 @@ const PROCESS = [
   },
 ];
 
-const TESTIMONIALS: {
-  name: string;
-  company: string;
-  image: string;
-}[] = [
-  {
-    name: "Claire D.",
-    company: "Académie Lumen",
-    image: testimonial1,
-  },
-  {
-    name: "Malik T.",
-    company: "Flowdesk",
-    image: testimonial2,
-  },
-  {
-    name: "Grace A.",
-    company: "Pixel Market",
-    image: testimonial3,
-  },
-  {
-    name: "Nadia K.",
-    company: "Digital Impact",
-    image: testimonial4,
-  },
-  {
-    name: "David A.",
-    company: "Growth Factory",
-    image: testimonial5,
-  },
+const TESTIMONIALS = [
+  { youtubeId: "2USMBvJM0yo" },
+  { youtubeId: "QcHhAPK3urQ" },
+  { youtubeId: "00k8NTrdC-c" },
+  { youtubeId: "EnO0UNK-xiI" },
+  { youtubeId: "-PzEca5Bngg" },
+  { youtubeId: "iWxlqSoZqF8" },
 ];
 
 const OFFERS = [
@@ -558,11 +551,27 @@ function CarouselNavigation({
 
 function ProjectCarousel({ projects }: { projects: typeof PROJECTS }) {
   const [viewportRef, api] = useEmblaCarousel({ align: "start", containScroll: "trimSnaps" });
+  const [activeProject, setActiveProject] = useState<(typeof PROJECTS)[number] | null>(null);
 
   useEffect(() => {
     api?.reInit();
     api?.scrollTo(0, true);
+    setActiveProject(null);
   }, [api, projects]);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setActiveProject(null);
+    };
+    if (activeProject) {
+      window.addEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = "hidden";
+    }
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = "";
+    };
+  }, [activeProject]);
 
   return (
     <Reveal className="mt-12">
@@ -570,83 +579,173 @@ function ProjectCarousel({ projects }: { projects: typeof PROJECTS }) {
         <div className="-ml-4 flex touch-pan-y md:-ml-6">
           {projects.map((project) => (
             <article
-              key={project.title}
+              key={project.youtubeId}
               className="min-w-0 flex-[0_0_88%] pl-4 sm:flex-[0_0_58%] md:pl-6 lg:flex-[0_0_40%]"
             >
-              <div className="group h-full overflow-hidden rounded-lg border border-border bg-card transition-all duration-300 hover:-translate-y-1 hover:border-primary hover:shadow-lg">
-                <div className="relative overflow-hidden">
-                  <img
-                    src={project.image}
-                    alt={`Aperçu de la vidéo publicitaire pour ${project.client}`}
-                    loading="lazy"
-                    width={1280}
-                    height={800}
-                    className="aspect-video w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
-                  <span className="absolute bottom-3 left-3 flex size-10 items-center justify-center rounded-full bg-background/90 text-foreground transition-colors duration-300 group-hover:bg-primary group-hover:text-primary-foreground">
-                    <Play className="size-4" strokeWidth={1.75} />
+              <button
+                type="button"
+                onClick={() => setActiveProject(project)}
+                className="group relative w-full overflow-hidden rounded-lg border border-border bg-black cursor-pointer transition-all duration-300 hover:-translate-y-1 hover:border-primary hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                aria-label={`Regarder la vidéo de ${project.title}`}
+              >
+                <img
+                  src={`https://img.youtube.com/vi/${project.youtubeId}/hqdefault.jpg`}
+                  alt={`Aperçu de la vidéo publicitaire pour ${project.client}`}
+                  loading="lazy"
+                  width={480}
+                  height={360}
+                  className="aspect-video w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 flex items-center justify-center bg-black/10 transition-colors group-hover:bg-black/30">
+                  <span className="flex size-14 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-lg transition-all duration-300 group-hover:scale-110 group-hover:shadow-primary/40 active:scale-95">
+                    <Play className="size-6 ml-0.5 fill-current" strokeWidth={2} />
                   </span>
                 </div>
-                <div className="p-6">
-                  <p className="text-xs tracking-wide text-muted-foreground uppercase">
-                    {project.tag} · {project.client}
-                  </p>
-                  <h3 className="mt-2 text-lg font-semibold">{project.title}</h3>
-                  <p className="mt-2 text-sm text-muted-foreground">{project.goal}</p>
-                </div>
-              </div>
+              </button>
             </article>
           ))}
         </div>
       </div>
       <CarouselNavigation api={api} label="projets récents" />
+
+      {/* Modal Lightbox — vidéo 9:16 vertical (Shorts / Reels) */}
+      {activeProject && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4 backdrop-blur-sm"
+          onClick={() => setActiveProject(null)}
+        >
+          <div
+            className="relative flex flex-col items-center w-full max-w-xs"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Bouton fermer */}
+            <button
+              type="button"
+              onClick={() => setActiveProject(null)}
+              className="absolute -top-10 right-0 flex size-9 items-center justify-center rounded-full bg-white/10 text-white hover:bg-white/25 transition-colors backdrop-blur-sm"
+              aria-label="Fermer"
+            >
+              <X className="size-5" />
+            </button>
+
+            {/* Lecteur vidéo 9:16 */}
+            <div className="relative aspect-[9/16] w-full max-h-[85vh] overflow-hidden rounded-2xl bg-black shadow-2xl">
+              <iframe
+                src={`https://www.youtube-nocookie.com/embed/${activeProject.youtubeId}?autoplay=1&rel=0&modestbranding=1`}
+                title={activeProject.title}
+                className="size-full border-0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+              />
+            </div>
+          </div>
+        </div>
+      )}
     </Reveal>
   );
 }
 
 function TestimonialCarousel() {
   const [viewportRef, api] = useEmblaCarousel({ align: "start", containScroll: "trimSnaps" });
+  const [activeId, setActiveId] = useState<string | null>(null);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setActiveId(null);
+    };
+    if (activeId) {
+      window.addEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = "hidden";
+    }
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = "";
+    };
+  }, [activeId]);
 
   return (
     <Reveal className="mt-12">
       <div ref={viewportRef} className="overflow-hidden">
         <div className="-ml-4 flex touch-pan-y md:-ml-6">
           {TESTIMONIALS.map((testimonial) => (
-            <figure
-              key={testimonial.name}
+            <article
+              key={testimonial.youtubeId}
               className="min-w-0 flex-[0_0_90%] pl-4 sm:flex-[0_0_62%] md:pl-6 lg:flex-[0_0_46%]"
             >
-              <div className="group relative aspect-video overflow-hidden rounded-lg border border-border bg-secondary transition-all duration-300 hover:-translate-y-1 hover:border-primary hover:shadow-lg">
+              <button
+                type="button"
+                onClick={() => setActiveId(testimonial.youtubeId)}
+                className="group relative w-full overflow-hidden rounded-lg border border-border bg-black cursor-pointer transition-all duration-300 hover:-translate-y-1 hover:border-primary hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                aria-label="Regarder le témoignage vidéo"
+              >
                 <img
-                  src={testimonial.image}
-                  alt={`Témoignage vidéo de ${testimonial.name}`}
+                  src={`https://img.youtube.com/vi/${testimonial.youtubeId}/hqdefault.jpg`}
+                  alt="Témoignage client vidéo"
                   loading="lazy"
-                  width={1280}
-                  height={720}
-                  className="size-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  width={480}
+                  height={360}
+                  className="aspect-video w-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />
-                <span className="absolute inset-0 bg-black/25" />
+                <span className="absolute inset-0 bg-black/20 transition-colors group-hover:bg-black/35" />
                 <span className="absolute inset-0 flex items-center justify-center">
-                  <span className="flex size-14 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-lg transition-transform duration-300 group-hover:scale-110">
-                    <Play className="size-5" strokeWidth={1.75} />
+                  <span className="flex size-14 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-lg transition-all duration-300 group-hover:scale-110 group-hover:shadow-primary/40 active:scale-95">
+                    <Play className="size-6 ml-0.5 fill-current" strokeWidth={2} />
                   </span>
                 </span>
-                <figcaption className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-3 bg-gradient-to-t from-black/80 to-transparent px-5 pt-12 pb-4 text-white">
-                  <span>
-                    <strong className="block text-sm font-semibold">{testimonial.name}</strong>
-                    <span className="text-xs text-white/75">{testimonial.company}</span>
-                  </span>
-                  <span className="rounded-full bg-background/90 px-3 py-1 text-xs font-medium text-foreground">
-                    Témoignage vidéo
-                  </span>
-                </figcaption>
-              </div>
-            </figure>
+              </button>
+            </article>
           ))}
         </div>
       </div>
       <CarouselNavigation api={api} label="témoignages clients" />
+
+      {/* Modal Lightbox — témoignage 9:16 vertical */}
+      {activeId && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4 backdrop-blur-sm"
+          onClick={() => setActiveId(null)}
+        >
+          <div
+            className="relative flex flex-col items-center w-full max-w-xs"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              type="button"
+              onClick={() => setActiveId(null)}
+              className="absolute -top-10 right-0 flex size-9 items-center justify-center rounded-full bg-white/10 text-white hover:bg-white/25 transition-colors backdrop-blur-sm"
+              aria-label="Fermer"
+            >
+              <X className="size-5" />
+            </button>
+            <div className="relative aspect-[9/16] w-full max-h-[85vh] overflow-hidden rounded-2xl bg-black shadow-2xl">
+              <iframe
+                src={`https://www.youtube-nocookie.com/embed/${activeId}?autoplay=1&rel=0&modestbranding=1`}
+                title="Témoignage client"
+                className="size-full border-0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+              />
+            </div>
+          </div>
+        </div>
+      )}
     </Reveal>
+  );
+}
+
+const SHOWREEL_YOUTUBE_ID = "1w07o_weNr4";
+
+function ShowreelPlayer() {
+  return (
+    <div className="relative aspect-video w-full overflow-hidden rounded-2xl border border-border bg-black shadow-2xl">
+      <iframe
+        src={`https://www.youtube-nocookie.com/embed/${SHOWREEL_YOUTUBE_ID}?autoplay=1&mute=1&loop=1&playlist=${SHOWREEL_YOUTUBE_ID}&playsinline=1&rel=0&modestbranding=1`}
+        title="Showreel de vidéos publicitaires en motion design 2D"
+        className="size-full border-0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowFullScreen
+      />
+    </div>
   );
 }
 
@@ -734,20 +833,7 @@ function Index() {
           </Reveal>
 
           <Reveal delay={120} className="mt-16">
-            <div className="group relative overflow-hidden rounded-2xl border border-border">
-              <img
-                src={showreel}
-                alt="Showreel de vidéos publicitaires en motion design 2D"
-                width={1600}
-                height={900}
-                className="aspect-video w-full object-cover transition-transform duration-700 group-hover:scale-[1.02]"
-              />
-              <div className="absolute inset-0 flex items-center justify-center">
-                <span className="flex size-16 items-center justify-center rounded-full bg-primary text-primary-foreground transition-transform duration-300 group-hover:scale-110">
-                  <Play className="size-6" strokeWidth={1.75} />
-                </span>
-              </div>
-            </div>
+            <ShowreelPlayer />
           </Reveal>
         </section>
 
@@ -934,18 +1020,6 @@ function Index() {
                 ))}
               </Accordion>
             </Reveal>
-            <Reveal delay={160} className="mt-10 text-muted-foreground">
-              Une question qui n'est pas là ?{" "}
-              <a
-                href={WHATSAPP_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="font-semibold text-primary underline underline-offset-4"
-              >
-                Posez-la en direct
-              </a>
-              .
-            </Reveal>
           </div>
         </section>
 
@@ -953,16 +1027,16 @@ function Index() {
         <section id="cta-final" className="bg-secondary text-secondary-foreground">
           <div className="mx-auto max-w-3xl px-5 py-24 text-center">
             <Reveal>
-              <p className="inline-flex items-center gap-2 rounded-full border border-secondary-foreground/20 px-4 py-1.5 text-xs tracking-wide uppercase">
-                <Zap className="size-3.5 text-primary" strokeWidth={2} />4 projets par mois maximum
-              </p>
+
               <h2 className="mt-7 text-3xl font-semibold md:text-5xl">
                 Votre produit est déjà bon
               </h2>
               <p className="mx-auto mt-5 max-w-lg text-secondary-foreground/70">
                 Maintenant, allons le rendre impossible à ignorer.
               </p>
-              <WhatsAppChatPreview />
+              <div className="mt-10">
+                <WhatsAppChatPreview />
+              </div>
               <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
                 <WhatsAppButton size="lg" icon={<WhatsAppIcon className="size-5" />}>
                   Discutons sur WhatsApp
@@ -982,25 +1056,15 @@ function Index() {
             motion<span className="text-primary">.</span>
           </p>
           <div className="flex items-center gap-6 text-sm text-muted-foreground">
-            <a
-              href={WHATSAPP_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="transition-colors hover:text-primary"
-            >
-              WhatsApp
-            </a>
-            <a
-              href={INSTAGRAM_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="transition-colors hover:text-primary"
-            >
-              Instagram
-            </a>
-            <a href="#faq" className="transition-colors hover:text-primary">
-              Mentions légales
-            </a>
+            {NAV.map((item) => (
+              <a
+                key={item.href}
+                href={item.href}
+                className="transition-colors hover:text-primary"
+              >
+                {item.label}
+              </a>
+            ))}
           </div>
           <a
             href="#top"

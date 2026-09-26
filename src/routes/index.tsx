@@ -735,11 +735,47 @@ function TestimonialCarousel() {
 
 const SHOWREEL_YOUTUBE_ID = "1w07o_weNr4";
 
+const SHOWREEL_GESTURE_EVENTS = [
+  "pointerdown",
+  "touchstart",
+  "keydown",
+  "wheel",
+  "scroll",
+] as const;
+
 function ShowreelPlayer() {
+  const iframeRef = useRef<HTMLIFrameElement>(null);
+
+  // Le son est réactivé automatiquement dès la première interaction
+  // (clic, touche, molette ou scroll) : les navigateurs bloquent le son
+  // d'une lecture automatique tant que l'utilisateur n'a pas interagi.
+  useEffect(() => {
+    const iframe = iframeRef.current;
+    if (!iframe) return;
+    const unmute = () => {
+      iframe.contentWindow?.postMessage(
+        JSON.stringify({ event: "command", func: "unMute", args: [] }),
+        "*"
+      );
+      iframe.contentWindow?.postMessage(
+        JSON.stringify({ event: "command", func: "setVolume", args: [100] }),
+        "*"
+      );
+    };
+    SHOWREEL_GESTURE_EVENTS.forEach((evt) =>
+      window.addEventListener(evt, unmute, { passive: true })
+    );
+    return () =>
+      SHOWREEL_GESTURE_EVENTS.forEach((evt) =>
+        window.removeEventListener(evt, unmute)
+      );
+  }, []);
+
   return (
     <div className="relative aspect-video w-full overflow-hidden rounded-2xl border border-border bg-black shadow-2xl">
       <iframe
-        src={`https://www.youtube-nocookie.com/embed/${SHOWREEL_YOUTUBE_ID}?autoplay=1&mute=1&loop=1&playlist=${SHOWREEL_YOUTUBE_ID}&playsinline=1&rel=0&modestbranding=1`}
+        ref={iframeRef}
+        src={`https://www.youtube-nocookie.com/embed/${SHOWREEL_YOUTUBE_ID}?autoplay=1&mute=1&loop=1&playlist=${SHOWREEL_YOUTUBE_ID}&playsinline=1&rel=0&modestbranding=1&enablejsapi=1`}
         title="Showreel de vidéos publicitaires en motion design 2D"
         className="size-full border-0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"

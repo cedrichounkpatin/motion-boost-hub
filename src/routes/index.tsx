@@ -13,6 +13,7 @@ import {
   MessageCircle,
   Play,
   Star,
+  Volume2,
   Zap,
   X,
 } from "lucide-react";
@@ -745,6 +746,7 @@ const SHOWREEL_GESTURE_EVENTS = [
 
 function ShowreelPlayer() {
   const iframeRef = useRef<HTMLIFrameElement>(null);
+  const [soundOn, setSoundOn] = useState(false);
 
   // Le son est réactivé automatiquement dès la première interaction
   // (clic, touche, molette ou scroll) : les navigateurs bloquent le son

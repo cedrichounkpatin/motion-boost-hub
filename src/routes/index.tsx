@@ -755,6 +755,7 @@ function ShowreelPlayer() {
     const iframe = iframeRef.current;
     if (!iframe) return;
     const unmute = () => {
+      setSoundOn(true);
       iframe.contentWindow?.postMessage(
         JSON.stringify({ event: "command", func: "unMute", args: [] }),
         "*"
@@ -783,6 +784,28 @@ function ShowreelPlayer() {
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
         allowFullScreen
       />
+      {!soundOn && (
+        <button
+          type="button"
+          onClick={() => {
+            const iframe = iframeRef.current;
+            iframe?.contentWindow?.postMessage(
+              JSON.stringify({ event: "command", func: "unMute", args: [] }),
+              "*"
+            );
+            iframe?.contentWindow?.postMessage(
+              JSON.stringify({ event: "command", func: "setVolume", args: [100] }),
+              "*"
+            );
+            setSoundOn(true);
+          }}
+          className="absolute bottom-3 left-3 z-10 inline-flex items-center gap-2 rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground shadow-lg transition-transform hover:scale-105 active:scale-95"
+          aria-label="Activer le son de la vidéo"
+        >
+          <Volume2 className="size-4" strokeWidth={2} />
+          Activer le son
+        </button>
+      )}
     </div>
   );
 }

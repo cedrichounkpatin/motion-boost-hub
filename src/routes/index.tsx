@@ -26,7 +26,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/site/reveal";
 import { WHATSAPP_URL, INSTAGRAM_URL } from "@/components/site/contact";
-import traficMegaphoneAsset from "@/assets/trafic-megaphone.png.asset.json";
+const TRAFIC_MEGAPHONE_URL = "/trafic-megaphone.png";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -828,7 +828,7 @@ function Index() {
             <span className="text-foreground">2D</span>
             <span className="relative ml-1 flex h-7 w-7 shrink-0 items-center justify-center overflow-hidden rounded-full bg-primary">
               <img
-                src={traficMegaphoneAsset.url}
+                src={TRAFIC_MEGAPHONE_URL}
                 alt=""
                 className="h-5 w-5 object-contain"
               />
@@ -860,7 +860,7 @@ function Index() {
           <Reveal className="mx-auto max-w-3xl text-center">
             <div className="traffic-visual mx-auto mb-8">
               <img
-                src={traficMegaphoneAsset.url}
+                src={TRAFIC_MEGAPHONE_URL}
                 alt="Mégaphone blanc et orange, symbole des vidéos publicitaires"
                 className="traffic-banner mx-auto w-[180px] sm:w-[230px]"
                 loading="eager"

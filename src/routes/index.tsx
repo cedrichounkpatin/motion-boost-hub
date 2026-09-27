@@ -26,7 +26,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/site/reveal";
 import { WHATSAPP_URL, INSTAGRAM_URL } from "@/components/site/contact";
-import traficMegaphoneAsset from "@/assets/trafic-megaphone.png.asset.json";
+const TRAFIC_MEGAPHONE_URL = "/trafic-megaphone.png";
 
 export const Route = createFileRoute("/")({
   head: () => ({

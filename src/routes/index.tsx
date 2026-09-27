@@ -275,7 +275,7 @@ const PROCESS = [
   {
     step: "05",
     title: "Livraison au formats de votre choix",
-    text: "9:16 → Stories, Reels, TikTok, WhatsApp\n1:1 → Facebook, Instagram\n16:9 → YouTube, certains espaces publicitaires",
+    text: "9:16 → Stories, Reels, TikTok, WhatsApp \n1:1 → Facebook, Instagram \n16:9 → YouTube, certains espaces publicitaires",
   },
 ];
 
@@ -316,8 +316,8 @@ const OFFERS = [
     items: [
        { text: "", type: "check", prefix: "Votre vidéo publicitaire", suffix: "[62€]" },
         { text: "Vous recevez également deux différentes affiches publicitaires animées pour maximiser vos ventes (Andromeda) ", type: "check", prefix: "+ 2 Affiches publicitaires animée", suffix: "[40€]" },
-        { text: "Un texte court et percutant pour chaque affiches publicitaires animées (Copywriting optimisé)", type: "check", prefix: "+ 3 Textes Publicitaire", suffix: "[45€]" },
-      { text: "Livraison en 05 jours", type: "bold" },
+        { text: "Un texte court et percutant pour chaque créatives (Copywriting optimisé)", type: "check", prefix: "+ 3 Textes Publicitaire", suffix: "[45€]" },
+      { text: "Livraison en 06 jours", type: "bold" },
       { text: "Une page de vente prête à copier coller", type: "gift", prefix: "1 Page de vente", suffix: "[35€]" },
     ],
     featured: true,
@@ -332,7 +332,7 @@ const OFFERS = [
          { text: "Pour chaque vidéo publicitaire livrée, vous recevez 2 affiches publicitaires animées différentes, adaptées à votre communication.  ", type: "check", prefix: "+2 Deux affiches publicitaires animées/Vidéo ", suffix: "[40 €/Vidéo]" },
         { text: "Pour chaque créative, vous recevez 1 textes publicitaires (Copywriting optimisé) ", type: "check", prefix: "+3 Textes publicitaire ", suffix: "[30€/Vidéo]" },
        { text: "Une page de vente prête à copier coller", type: "gift", prefix: "1 page de vente", suffix: "[35€]" },
-      { text: "Livraison en 07 jours", type: "bold" },
+      { text: "Livraison en 02 semaines", type: "bold" },
     ],
     featured: false,
   },
@@ -341,7 +341,7 @@ const OFFERS = [
 const FAQ = [
   {
     q: "Quel est le délai de livraison ?",
-    a: "Comptez 5 à 7 jours ouvrés pour une vidéo, à partir de la validation du script. Un format urgent est possible en 72 h selon les disponibilités du mois.",
+    a: "Le délai de livraison dépend de l'offre choisie et du type de vidéo à réaliser. Il varie généralement de 4 jours à 2 semaines selon la formule sélectionneé",
   },
   {
     q: "Combien coûte une vidéo ?",
@@ -973,7 +973,7 @@ function Index() {
           <Reveal className="max-w-xl">
             <h2 className="text-3xl font-semibold md:text-4xl">Trois façons de travailler</h2>
             <p className="mt-3 text-muted-foreground">
-              Pas de grille tarifaire figée : le prix suit le périmètre réel de votre projet.
+              Conçu pour répondre précisément à votre objectif et faire passer votre projet au niveau supérieur
             </p>
           </Reveal>
           <div className="mt-12 grid gap-6 md:grid-cols-3">
@@ -1104,7 +1104,7 @@ function Index() {
                 </WhatsAppButton>
               </div>
               <p className="mt-6 text-sm text-secondary-foreground/50">
-                Réponse sous 12 h en semaine.
+                Réponse sous 24h
               </p>
             </Reveal>
           </div>
